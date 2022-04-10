@@ -1,4 +1,5 @@
 export const state = () => ({
+  overlay: false,
   areas: [
     { areaId: 1, title: 'ภาค 1', path: '1', coords: '', x: 0, y: 0 },
     { areaId: 2, title: 'ภาค 2', path: '2', coords: '', x: 0, y: 0 },
@@ -45,11 +46,25 @@ export const state = () => ({
 })
 
 export const getters = {
+  getOverlay(state) {
+    return state.overlay
+  },
   getAreas(state) {
     return state.areas
   },
 }
 
-export const mutations = {}
+export const mutations = {
+  SET_OVERLAY(state, payload) {
+    state.overlay = payload
+  },
+}
 
-export const actions = {}
+export const actions = {
+  finishOverlay({ commit }) {
+    commit('SET_OVERLAY', false)
+  },
+  startOverlay({ commit }) {
+    commit('SET_OVERLAY', true)
+  },
+}

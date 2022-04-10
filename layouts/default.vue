@@ -1,6 +1,11 @@
 <template>
   <v-app>
     <v-app-bar v-if="!isStartPage" fixed app>
+      <img
+        class="mr-3"
+        src="~/assets/images/logo.png"
+        height="40"
+      />
       <v-toolbar-title v-text="title" />
       <v-spacer />
     </v-app-bar>
@@ -22,15 +27,15 @@
 <script>
 export default {
   name: 'DefaultLayout',
-  created(){
-    this.checkRoute();
+  created() {
+    this.checkRoute()
   },
   data() {
     return {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
+      title: 'นิทรรศการมหาเถรสมาคม',
       isStartPage: false,
     }
   },
@@ -41,7 +46,7 @@ export default {
   },
   methods: {
     checkRoute() {
-      if (this.$route.name == 'index' || this.$route.name == 'start') {
+      if (this.$route.name == 'index') {
         this.isStartPage = true
         return
       }

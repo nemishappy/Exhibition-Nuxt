@@ -1,44 +1,50 @@
 <template>
-  <div>
+  <div v-if="loadAreas">
     <!-- gets re-positioned in myInit(); -->
     <canvas id="myCanvas" ref="myCanvas"></canvas>
-    <center>
-      <img
-        src="~/assets/images/Thailand_Map.png"
-        usemap="#imgmap_css_container_imgmap201293016112"
-        class="imgmap_css_container"
-        alt="imgmap201293016112"
-        id="img-imgmap201293016112"
-        ref="img-imgmap201293016112"
-        width="701"
-        height="1280"
-        @load="myInit"
-      />
+    <img
+      src="~/assets/images/Thailand_Map.png"
+      usemap="#imgmap_css_container_imgmap201293016112"
+      class="imgmap_css_container"
+      alt="imgmap201293016112"
+      id="img-imgmap201293016112"
+      ref="img-imgmap201293016112"
+      width="701"
+      height="1280"
+      @load="myInit"
+    />
 
-      <map name="imgmap_css_container_imgmap201293016112">
-        <area
-          v-for="(area, index) in areas"
-          :key="index"
-          target=""
-          :href="area.path"
-          @mouseover="drawArea(index)"
-          @mouseout="myLeave()"
-          alt="imgmap201293016112-0"
-          :title="area.title"
-          :coords="area.coords"
-          shape="poly"
-        />
-      </map>
-    </center>
+    <map name="imgmap_css_container_imgmap201293016112">
+      <area
+        v-for="(area, index) in areas"
+        :key="index"
+        target=""
+        :href="area.path"
+        @mouseover="drawArea(index)"
+        @mouseout="myLeave()"
+        alt="imgmap201293016112-0"
+        :title="area.title"
+        :coords="area.coords"
+        shape="poly"
+      />
+    </map>
+  </div>
+  <div v-else>
+    <Overlay />
   </div>
 </template>
 
 <script>
-var hdc
-var clipImage
+import Overlay from '~/components/Overlay'
+var canvas
+var ctx
 var img
 var imgArray = new Array()
+var timeoutId
 export default {
+  components: {
+    Overlay,
+  },
   data() {
     return {
       areas: [
@@ -205,15 +211,25 @@ export default {
           y: 1075,
         },
       ],
+      loadAreas: false,
+      timer: null,
     }
   },
-  mounted() {
+  async mounted() {
     for (let index = 0; index < 18; index++) {
       imgArray[index] = new Image()
-      imgArray[index].src = require('~/assets/images/areas/' +
+      imgArray[index].src = await require('~/assets/images/areas/' +
         (index + 1) +
         '.png')
     }
+
+    this.$nextTick(() => {
+      this.$store.dispatch('startOverlay')
+      timeoutId = setTimeout(() => {
+        this.$store.dispatch('finishOverlay')
+        this.loadAreas = true
+      }, 500)
+    })
   },
   computed: {
     // areas() {
@@ -225,64 +241,63 @@ export default {
       return this.$refs[e]
     },
     async drawArea(index) {
-      // clipImage = new Image()
-      // clipImage.src = require('~/assets/images/areas/' + (index + 1) + '.png')
+      // check contecxt
+      if (ctx != null) {
+        // draw area
+        clearTimeout(this.timer)
+        await ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.drawImage(imgArray[index], this.areas[index].x, this.areas[index].y)
+        img.style.opacity = 0.3
 
-      // draw the image which will be clipped except in the clipping path
-      console.log(this.areas[index])
-      hdc.drawImage(imgArray[index], this.areas[index].x, this.areas[index].y)
-      img.style.opacity = 0.3
-
-      // restore the unclipped context (==undo the clipping path)
-      hdc.restore()
+        // restore the unclipped context (==undo the clipping path)
+        ctx.restore()
+      }
     },
     myLeave() {
-      var canvas = this.byRefs('myCanvas')
-      hdc.clearRect(0, 0, canvas.width, canvas.height)
+      this.timer = setTimeout(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+      }, 500)
       img.style.opacity = 1.0
     },
-    myInit() {
+    async myInit() {
       // get the target image
-      img = this.byRefs('img-imgmap201293016112')
+      img = await this.byRefs('img-imgmap201293016112')
 
       var x, y, w, h
 
       // get it's position and width+height
-
       x = img.offsetLeft
       y = img.offsetTop
       w = img.clientWidth + 10
       h = img.clientHeight + 10
+
       // move the canvas, so it's contained by the same parent as the image
       var imgParent = img.parentNode
-      var can = this.byRefs('myCanvas')
-      imgParent.appendChild(can)
+      canvas = await this.byRefs('myCanvas')
+      imgParent.appendChild(canvas)
 
       // place the canvas in front of the image
-      can.style.zIndex = 1
+      canvas.style.zIndex = 1
 
       // position it over the image
-      can.style.left = x + 'px'
-      can.style.top = y + 'px'
+      canvas.style.left = x + 'px'
+      canvas.style.top = y + 'px'
 
       // make same size as the image
-      can.setAttribute('width', w + 'px')
-      can.setAttribute('height', h + 'px')
+      canvas.setAttribute('width', w + 'px')
+      canvas.setAttribute('height', h + 'px')
 
       // get it's context
-      hdc = can.getContext('2d')
+      ctx = canvas.getContext('2d')
 
       // set the 'default' values for the colour/width of fill/stroke operations
-      hdc.lineWidth = 1
-      hdc.shadowColor = 'black'
-      hdc.shadowBlur = 6
-      hdc.shadowOffsetX = 6
-      hdc.shadowOffsetY = 6
-      this.loadClipImage()
-    },
-    loadClipImage() {
-      clipImage = new Image()
-      clipImage.src = require('~/assets/images/areas/7.png')
+      ctx.lineWidth = 1
+      ctx.shadowColor = 'black'
+      ctx.shadowBlur = 6
+      ctx.shadowOffsetX = 6
+      ctx.shadowOffsetY = 6
+
+      clearTimeout(timeoutId)
     },
   },
 }
