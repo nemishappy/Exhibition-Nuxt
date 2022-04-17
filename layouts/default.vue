@@ -1,17 +1,19 @@
 <template>
   <v-app>
     <v-app-bar v-if="!isStartPage" fixed app>
-      <img
-        class="mr-3"
-        src="~/assets/images/logo.png"
-        height="40"
-      />
-      <v-toolbar-title v-text="title" />
+      <img class="mr-3 start" @click="toHome" src="~/assets/images/logo.png" height="40" />
+      <v-toolbar-title class="start" v-text="title"  @click="toHome"/>
       <v-spacer />
+      <div>name</div>
+      <v-btn v-show="$route.name == 'start' ? false : true" icon @click="back">
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-main v-if="!isStartPage">
       <v-container>
-        <Nuxt />
+        <v-card class="pa-4" elevation="10" tile >
+          <Nuxt />
+        </v-card>
       </v-container>
     </v-main>
     <v-main v-else>
@@ -19,7 +21,7 @@
     </v-main>
 
     <v-footer app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>&copy; {{ new Date().getFullYear() }} สำนักงานกองทุนสนับสนุนการสร้างเสริมสุขภาพ (สสส.)</span>
     </v-footer>
   </v-app>
 </template>
@@ -52,6 +54,12 @@ export default {
       }
       this.isStartPage = false
     },
+    back() {
+      this.$router.go(-1)
+    },
+    toHome() {
+      this.$router.push({ name: 'start' })
+    },
   },
 }
 </script>
@@ -66,5 +74,11 @@ export default {
 }
 .no-uppercase {
   text-transform: unset !important;
+}
+.container {
+  padding: 0 12px !important;
+}
+.start {
+  cursor: pointer;
 }
 </style>

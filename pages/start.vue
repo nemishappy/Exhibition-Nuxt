@@ -1,6 +1,8 @@
 <template>
   <div v-if="loadAreas">
     <!-- gets re-positioned in myInit(); -->
+    <h1 class="mb-4">แผนที่แบ่งภาคการปกครองคณะสงฆ์
+    </h1>
     <canvas id="myCanvas" ref="myCanvas"></canvas>
     <img
       src="~/assets/images/Thailand_Map.png"
@@ -15,18 +17,20 @@
     />
 
     <map name="imgmap_css_container_imgmap201293016112">
-      <area
+      <nuxt-link
         v-for="(area, index) in areas"
         :key="index"
-        target=""
-        :href="area.path"
-        @mouseover="drawArea(index)"
-        @mouseout="myLeave()"
-        alt="imgmap201293016112-0"
-        :title="area.title"
-        :coords="area.coords"
-        shape="poly"
-      />
+        :to="{ name: 'areas-id', params: { id: area.path } }"
+      >
+        <area
+          @mouseover="drawArea(index)"
+          @mouseout="myLeave()"
+          alt="imgmap201293016112-0"
+          :title="area.title"
+          :coords="area.coords"
+          shape="poly"
+        />
+      </nuxt-link>
     </map>
   </div>
   <div v-else>
@@ -218,7 +222,7 @@ export default {
   async mounted() {
     for (let index = 0; index < 18; index++) {
       imgArray[index] = new Image()
-      imgArray[index].src = await require('~/assets/images/areas/' +
+      imgArray[index].src = await require('~/assets/images/areas/scale/' +
         (index + 1) +
         '.png')
     }
@@ -256,8 +260,8 @@ export default {
     myLeave() {
       this.timer = setTimeout(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
+        img.style.opacity = 1.0
       }, 500)
-      img.style.opacity = 1.0
     },
     async myInit() {
       // get the target image
@@ -304,11 +308,23 @@ export default {
 </script>
 
 <style scoped>
-div {
+/* div {
   background-color: gray;
-}
+} */
 canvas {
   pointer-events: none; /* make the canvas transparent to the mouse - needed since canvas is position infront of image */
   position: absolute;
+}
+
+@keyframes leaves {
+  0% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+
+  100% {
+    transform: scale(2);
+    -webkit-transform: scale(2);
+  }
 }
 </style>
