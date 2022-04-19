@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loadAreas">
+  <div v-if="loadAreas" class="box">
     <!-- gets re-positioned in myInit(); -->
     <h1 class="mb-4">แผนที่แบ่งภาคการปกครองคณะสงฆ์
     </h1>
@@ -311,6 +311,9 @@ export default {
 /* div {
   background-color: gray;
 } */
+.box{
+  height: 100%;
+}
 canvas {
   pointer-events: none; /* make the canvas transparent to the mouse - needed since canvas is position infront of image */
   position: absolute;

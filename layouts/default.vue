@@ -11,7 +11,7 @@
     </v-app-bar>
     <v-main v-if="!isStartPage">
       <v-container>
-        <v-card class="pa-4" elevation="10" tile >
+        <v-card class="pa-4" elevation="10" tile  >
           <Nuxt />
         </v-card>
       </v-container>
@@ -77,6 +77,8 @@ export default {
 }
 .container {
   padding: 0 12px !important;
+  margin-bottom: 24px!important;
+  height: 100%;
 }
 .start {
   cursor: pointer;

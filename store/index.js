@@ -43,6 +43,35 @@ export const state = () => ({
     { areaId: 17, title: 'ภาค 17', path: '17', coords: '', x: 0, y: 0 },
     { areaId: 18, title: 'ภาค 18', path: '18', coords: '', x: 0, y: 0 },
   ],
+  projects: [
+    {
+      areaID: 1,
+      projectID: 1,
+      title: 'จังหวัด...',
+      subtitle:
+        'เนื้อหาโดยย่ออออออออออออออย่ออออออออออออออ เนื้อหาโดยย่ออออออออออออออย่ออออออออออออออ เนื้อหาโดยย่ออออออออออออออย่ออออออออออออออ',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim massa, blandit sed hendrerit ac, imperdiet rutrum diam. Etiam sed urna sed dui facilisis scelerisque a eu orci. Nulla blandit turpis vitae turpis suscipit lobortis. Curabitur porta vestibulum eleifend. Suspendisse potenti. Fusce porta porttitor ornare. Donec aliquet egestas enim, sit amet lacinia lorem scelerisque vel. In urna lectus, euismod et tempor at, fermentum vitae nisi. Praesent lacinia dolor cursus, convallis magna et, posuere lectus. Proin ac posuere nisi. \
+Praesent eget massa et nisi volutpat faucibus sit amet id risus. Ut dapibus efficitur magna, ut tristique lorem venenatis nec. In iaculis malesuada tincidunt. Proin vestibulum ipsum sed erat vehicula, ut tristique urna varius. Mauris facilisis neque eget nisl commodo dignissim in at tortor. Etiam a tellus vel turpis consequat vestibulum. Aliquam dignissim libero ac ligula malesuada, commodo tempor eros vehicula. Nulla auctor scelerisque nunc, at efficitur nunc feugiat et. Ut eu erat tortor. Nullam semper sem eleifend magna varius, ut venenatis felis varius. Nam tincidunt maximus sapien, id bibendum est hendrerit ut. Maecenas sapien est, suscipit ac nulla accumsan, egestas pharetra nisi. Sed non erat egestas, aliquam ipsum ac, tincidunt sem.',
+      coverimg: 'https://i.imgur.com/DHBrzdp.png',
+      urlVideo: 'https://www.youtube.com/watch?v=KfcjTwGy5UU',
+      x: 450,
+      y: 120,
+    },
+    {
+      areaID: 1,
+      projectID: 2,
+      title: 'จังหวัด...2',
+      subtitle: 'เนื้อหาโดยย่ออออออออออออออย่ออออออออออออออ ',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim massa, blandit sed hendrerit ac, imperdiet rutrum diam. Etiam sed urna sed dui facilisis scelerisque a eu orci. Nulla blandit turpis vitae turpis suscipit lobortis. Curabitur porta vestibulum eleifend. Suspendisse potenti. Fusce porta porttitor ornare. Donec aliquet egestas enim, sit amet lacinia lorem scelerisque vel. In urna lectus, euismod et tempor at, fermentum vitae nisi. Praesent lacinia dolor cursus, convallis magna et, posuere lectus. Proin ac posuere nisi. \
+Praesent eget massa et nisi volutpat faucibus sit amet id risus. Ut dapibus efficitur magna, ut tristique lorem venenatis nec. In iaculis malesuada tincidunt. Proin vestibulum ipsum sed erat vehicula, ut tristique urna varius. Mauris facilisis neque eget nisl commodo dignissim in at tortor. Etiam a tellus vel turpis consequat vestibulum. Aliquam dignissim libero ac ligula malesuada, commodo tempor eros vehicula. Nulla auctor scelerisque nunc, at efficitur nunc feugiat et. Ut eu erat tortor. Nullam semper sem eleifend magna varius, ut venenatis felis varius. Nam tincidunt maximus sapien, id bibendum est hendrerit ut. Maecenas sapien est, suscipit ac nulla accumsan, egestas pharetra nisi. Sed non erat egestas, aliquam ipsum ac, tincidunt sem.',
+      coverimg: 'https://i.imgur.com/DHBrzdp.png',
+      urlVideo: 'https://www.youtube.com/watch?v=KfcjTwGy5UU',
+      x: 300,
+      y: 120,
+    },
+  ],
 })
 
 export const getters = {
@@ -51,6 +80,9 @@ export const getters = {
   },
   getAreas(state) {
     return state.areas
+  },
+  getProjects(state) {
+    return [...state.projects]
   },
 }
 

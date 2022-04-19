@@ -11,13 +11,13 @@
       max-height="500"
     >
       <v-menu
-        v-model="marker.isActive"
+        v-model="project.isActive"
         content-class="my-menu"
         transition="slide-x-transition"
         bottom
         offset-x
         :close-on-content-click="false"
-        v-for="(marker, index) in markers"
+        v-for="(project, index) in projects"
         :key="index"
       >
         <template v-slot:activator="{ on: menu, attrs }">
@@ -25,27 +25,38 @@
             <template v-slot:activator="{ on: tooltip }">
               <div
                 class="pin"
-                :ref="'pin' + marker.markerID"
+                :ref="'pin' + project.projectID"
                 v-bind="attrs"
                 v-on="{ ...tooltip, ...menu }"
               >
                 <v-icon color="red">mdi-map-marker</v-icon>
               </div>
             </template>
-            <span>{{ marker.title }}<br />คลิกเพื่ออ่านเพิ่มเติม</span>
+            <span>{{ project.title }}<br />คลิกเพื่ออ่านเพิ่มเติม</span>
           </v-tooltip>
         </template>
 
         <v-card max-width="400" class="mx-auto">
           <v-list>
             <v-list-item>
-              <img src="~assets/images/cover-demo.png" width="200px" alt="" />
+              <img
+                v-if="!project.coverimg"
+                src="~assets/images/cover-demo.png"
+                width="200px"
+                alt=""
+              />
+              <img v-else :src="project.coverimg" width="200px" alt="" />
 
               <v-list-item-content class="pa-4">
-                <v-list-item-title>{{ marker.title }}</v-list-item-title>
-                <v-list-item-subtitle class="text-wrap">{{
-                  marker.subtitle
-                }}</v-list-item-subtitle>
+                <v-list-item-title>{{ project.title }}</v-list-item-title>
+                <!-- <v-responsive class="overflow-y-hidden" max-height="150px">
+                  <v-list-item-subtitle class="content text-wrap">
+                    {{ project.content }}
+                  </v-list-item-subtitle>
+                </v-responsive> -->
+                <v-list-item-subtitle class="content text-wrap">
+                  {{ project.content }}
+                </v-list-item-subtitle>
                 <v-btn
                   class="no-uppercase align-self-end"
                   color="blue"
@@ -71,29 +82,20 @@ export default {
       routeID: '',
       pin,
       isLoaded: false,
-      markers: [
-        {
-          markerID: '1',
-          title: 'จังหวัด...',
-          subtitle:
-            'เนื้อหาโดยย่ออออออออออออออย่ออออออออออออออ เนื้อหาโดยย่ออออออออออออออย่ออออออออออออออ เนื้อหาโดยย่ออออออออออออออย่ออออออออออออออ',
-          x: 450,
-          y: 120,
-          isActive: false,
-        },
-        {
-          markerID: '2',
-          title: 'จังหวัด...2',
-          subtitle: 'เนื้อหาโดยย่ออออออออออออออย่ออออออออออออออ ',
-          x: 300,
-          y: 120,
-          isActive: false,
-        },
-      ],
+      projects: [],
     }
   },
   created() {
     this.routeID = this.$route.params.id
+    var projectOnDB = JSON.parse(
+      JSON.stringify(this.$store.getters.getProjects)
+    )
+    projectOnDB.forEach((data) => {
+      var obj = data
+      obj['isActive'] = false
+      this.projects.push(obj)
+    })
+    // this.projects =
   },
   mounted() {
     this.$nextTick(() => {
@@ -102,18 +104,18 @@ export default {
   },
   methods: {
     async initPin() {
-      this.markers.forEach((element) => {
-        var $ref = this.$refs[`pin${element.markerID}`][0]
+      this.projects.forEach((element) => {
+        var $ref = this.$refs[`pin${element.projectID}`][0]
         $ref.style.left = element.x + 'px'
         $ref.style.top = element.y + 'px'
       })
       // console.log(this.$refs)
     },
     toEvent(index) {
-      this.markers[index].isActive = false
+      // this.projects[index].isActive = false
       this.$router.push({
         name: 'areas-id-project-pid',
-        params: { id: this.routeID, pid: this.markers[index].markerID},
+        params: { id: this.routeID, pid: this.projects[index].projectID },
       })
     },
   },
@@ -149,7 +151,13 @@ export default {
   border-radius: 50%;
   animation: puls-effect 1.5s ease infinite;
 }
-
+.content {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 @keyframes puls-effect {
   0% {
     transform: scale(1);
