@@ -1,17 +1,22 @@
 <template>
   <v-app>
     <v-app-bar v-if="!isStartPage" fixed app>
-      <img class="mr-3 start" @click="toHome" src="~/assets/images/logo.png" height="40" />
-      <v-toolbar-title class="start" v-text="title"  @click="toHome"/>
+      <img
+        class="mr-3 start"
+        @click="toHome"
+        src="~/assets/images/logo.png"
+        height="40"
+      />
+      <v-toolbar-title class="start" v-text="title" @click="toHome" />
       <v-spacer />
-      <div>name</div>
-      <v-btn v-show="$route.name == 'start' ? false : true" icon @click="back">
+      <v-btn v-show="$route.name == 'start' ? false : true" text @click="back">
         <v-icon>mdi-arrow-left</v-icon>
+        <div>ย้อนกลับ</div>
       </v-btn>
     </v-app-bar>
     <v-main v-if="!isStartPage">
       <v-container>
-        <v-card class="pa-4" elevation="10" tile  >
+        <v-card class="pa-4" elevation="10" tile>
           <Nuxt />
         </v-card>
       </v-container>
@@ -21,7 +26,11 @@
     </v-main>
 
     <v-footer app>
-      <span>&copy; {{ new Date().getFullYear() }} สำนักงานกองทุนสนับสนุนการสร้างเสริมสุขภาพ (สสส.)</span>
+      <span
+        >&copy;
+        {{ new Date().getFullYear() }} สำนักงานกองทุนสนับสนุนการสร้างเสริมสุขภาพ
+        (สสส.)</span
+      >
     </v-footer>
   </v-app>
 </template>
@@ -77,7 +86,7 @@ export default {
 }
 .container {
   padding: 0 12px !important;
-  margin-bottom: 24px!important;
+  margin-bottom: 24px !important;
   height: 100%;
 }
 .start {
