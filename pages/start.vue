@@ -1,37 +1,38 @@
 <template>
   <div v-if="loadAreas" class="box">
-    <!-- gets re-positioned in myInit(); -->
-    <h1 class="mb-4">แผนที่แบ่งภาคการปกครองคณะสงฆ์
-    </h1>
-    <canvas id="myCanvas" ref="myCanvas"></canvas>
-    <img
-      src="~/assets/images/Thailand_Map.png"
-      usemap="#imgmap_css_container_imgmap201293016112"
-      class="imgmap_css_container"
-      alt="imgmap201293016112"
-      id="img-imgmap201293016112"
-      ref="img-imgmap201293016112"
-      width="701"
-      height="1280"
-      @load="myInit"
-    />
+    <v-container justify="center">
+      <!-- gets re-positioned in myInit(); -->
+      <HeaderText/>
+      <canvas id="myCanvas" ref="myCanvas"></canvas>
+      <img
+        src="~/assets/images/Thailand_Map.png"
+        usemap="#imgmap_css_container_imgmap201293016112"
+        class="imgmap_css_container"
+        alt="imgmap201293016112"
+        id="img-imgmap201293016112"
+        ref="img-imgmap201293016112"
+        width="701"
+        height="1280"
+        @load="myInit"
+      />
 
-    <map name="imgmap_css_container_imgmap201293016112">
-      <nuxt-link
-        v-for="(area, index) in areas"
-        :key="index"
-        :to="{ name: 'areas-id', params: { id: area.path } }"
-      >
-        <area
-          @mouseover="drawArea(index)"
-          @mouseout="myLeave()"
-          alt="imgmap201293016112-0"
-          :title="area.title"
-          :coords="area.coords"
-          shape="poly"
-        />
-      </nuxt-link>
-    </map>
+      <map name="imgmap_css_container_imgmap201293016112">
+        <nuxt-link
+          v-for="(area, index) in areas"
+          :key="index"
+          :to="{ name: 'areas-id', params: { id: area.path } }"
+        >
+          <area
+            @mouseover="drawArea(index)"
+            @mouseout="myLeave()"
+            alt="imgmap201293016112-0"
+            :title="area.title"
+            :coords="area.coords"
+            shape="poly"
+          />
+        </nuxt-link>
+      </map>
+    </v-container>
   </div>
   <div v-else>
     <Overlay />
@@ -48,6 +49,34 @@ var timeoutId
 export default {
   components: {
     Overlay,
+    HeaderText: () => import('@/components/custom/header/HeaderText'),
+    BannerText: () => import('@/components/custom/banner/BannerText'),
+    FeatureText: () => import('@/components/custom/features/FeatureText'),
+    PricingText: () => import('@/components/custom/pricing/PricingText'),
+    TeamText: () => import('@/components/custom/team/TeamText'),
+    ContactText: () => import('@/components/custom/contact/ContactText'),
+    TestimonialText: () =>
+      import('@/components/custom/testimonial/TestimonialText'),
+    C2aText: () => import('@/components/custom/c2a/C2aText'),
+    PortfolioText: () => import('@/components/custom/portfolio/PortfolioText'),
+    FormBannerText: () =>
+      import('@/components/custom/form-banner/FormBannerText'),
+    Header1: () => import('@/components/custom/header/Header1'),
+    Header2: () => import('@/components/custom/header/Header2'),
+    Banner1: () => import('@/components/custom/banner/Banner1'),
+    Banner2: () => import('@/components/custom/banner/Banner2'),
+    Feature1: () => import('@/components/custom/features/Feature1'),
+    Feature2: () => import('@/components/custom/features/Feature2'),
+    Feature3: () => import('@/components/custom/features/Feature3'),
+    FormBanner1: () => import('@/components/custom/form-banner/FormBanner1'),
+    Portfolio: () => import('@/components/custom/portfolio/Portfolio'),
+    Pricing: () => import('@/components/custom/pricing/Pricing'),
+    Team: () => import('@/components/custom/team/Team'),
+    Testimonial: () => import('@/components/custom/testimonial/Testimonial'),
+    Blog: () => import('@/components/custom/blogs/Blog'),
+    C2a1: () => import('@/components/custom/c2a/C2a1'),
+    C2a2: () => import('@/components/custom/c2a/C2a2'),
+    Contact: () => import('@/components/custom/contact/Contact'),
   },
   data() {
     return {
@@ -311,7 +340,7 @@ export default {
 /* div {
   background-color: gray;
 } */
-.box{
+.box {
   height: 100%;
 }
 canvas {

@@ -1,28 +1,49 @@
 <template>
   <div class="box">
-    <Dialog @stClick="downloadPDF" @ndClick="hideDialog"/>
-    <h2>{{ project.title }}</h2>
-    <div class="row">
-      <div class="column justify-center align-center">
-        <div>
-          <video-player :src="project.urlVideo" />
+    <v-container>
+      <div class="mini-spacer-30">
+        <v-row justify="center">
+          <v-col cols="12" sm="10" md="9" lg="7">
+            <div class="text-center">
+              <h2>{{ project.title }}</h2>
+              <p>มีพื้นที่งานจัดแสดงทั้งหมด 2 พื้นที่</p>
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+      <Dialog @stClick="downloadPDF" @ndClick="hideDialog" />
+
+      <div class="row">
+        <div class="column justify-center align-center">
+          <div>
+            <video-player :src="project.urlVideo" />
+          </div>
+        </div>
+        <div class="column justify-center">
+          <div class="d-flex flex-column">
+            <v-responsive class="content overflow-y-auto" max-height="400px">
+              <p>{{ project.content }}</p>
+            </v-responsive>
+            <ul>
+                <v-btn
+                  class="action no-uppercase"
+                  text
+                  color="primary"
+                  :href="project.Downloadurlvideo"
+                  >ดาวน์โหลดคลิปวิดีโอ</v-btn
+                >
+                <v-btn
+                  class="action no-uppercase"
+                  text
+                  color="primary"
+                  @click.prevent="openDialog"
+                  >ดาวน์โหลดเอกสาร</v-btn
+                >
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="column justify-center">
-        <div class="d-flex flex-column">
-          <v-responsive class="content overflow-y-auto" max-height="400px">
-            <p>{{ project.content }}</p>
-          </v-responsive>
-          <v-btn
-            class="action no-uppercase"
-            text
-            color="primary"
-            @click.prevent="openDialog"
-            >download PDF</v-btn
-          >
-        </div>
-      </div>
-    </div>
+    </v-container>
   </div>
 </template>
 
@@ -34,7 +55,7 @@ require('nuxt-video-player/src/assets/css/main.css')
 export default {
   components: {
     VideoPlayer,
-    Dialog
+    Dialog,
   },
   data() {
     return {
@@ -49,21 +70,22 @@ export default {
         project.areaID == this.$route.params.id &&
         project.projectID == this.routeID
     )
-    console.log(store.length)
+    // console.log(store.length)
     if (store.length == 0) {
       store = this.$store.getters.getProjects.filter(
         (project) => project.areaID === 1 && project.projectID == this.routeID
       )
     }
     this.project = store[0]
-    console.log(this.project)
+    // console.log(this.project)
   },
   methods: {
-    openDialog(){
+    openDialog() {
       this.$store.dispatch('setDialog', {
         isShow: true,
         title: 'ยินยอมนโยบายความเป็นส่วนตัว',
-        message: 'ข้อมูลส่วนบุคคลที่ถูกบันทึกอยู่ในไฟล์ .pdf <p class="font-weight-bold">ไม่อนุญาตให้นำไปแสวงหาผลประโยชน์ในด้านใดๆทั้งสิ้น</p>',
+        message:
+          'ข้อมูลส่วนบุคคลที่ถูกบันทึกอยู่ในไฟล์ .pdf <p class="font-weight-bold">ไม่อนุญาตให้นำไปแสวงหาผลประโยชน์ในด้านใดๆทั้งสิ้น</p>',
         stAction: 'ยอมรับ',
         ndAction: 'ไม่ยอมรับ',
       })
@@ -78,50 +100,47 @@ export default {
       })
     },
 
-    downloadPDF() { 
-      // const resumeRef = this.$fire.storage.ref('filePDF')
-      // resumeRef
-      //   .getDownloadURL()
-      //   .then((url) => {
-      //     // `url` is the download URL
-      //     console.log(url)
-      //     // This can be downloaded directly:
-      //     const xhr = new XMLHttpRequest()
-      //     xhr.responseType = 'blob'
-      //     xhr.onload = function () {
-      //       const blob = xhr.response
-      //       const link = document.createElement('a')
-      //       link.href = URL.createObjectURL(blob)
-      //       link.download = 'tenzin_resume'
-      //       link.click()
-      //       URL.revokeObjectURL(link.href)
-      //     }
-      //     xhr.open('GET', url)
-      //     xhr.send()
-      //   })
-      //   .catch((error) => {
-      //     // Handle any errors
-      //     switch (error.code) {
-      //       case 'storage/object-not-found':
-      //         // File doesn't exist
-      //         break
-
-      //       case 'storage/unauthorized':
-      //         // User doesn't have permission to access the object
-      //         break
-
-      //       case 'storage/canceled':
-      //         // User canceled the upload
-      //         break
-
-      //       case 'storage/unknown':
-      //         // Unknown error occurred, inspect the server response
-      //         break
-      //       default:
-      //         break
-      //     }
-      //   })
-    },
+    // downloadPDF() {
+    //   const resumeRef = project.urlPDF
+    //   resumeRef
+    //     .getDownloadURL()
+    //     .then((url) => {
+    //       // `url` is the download URL
+    //       console.log(url)
+    //       // This can be downloaded directly:
+    //       const xhr = new XMLHttpRequest()
+    //       xhr.responseType = 'blob'
+    //       xhr.onload = function () {
+    //         const blob = xhr.response
+    //         const link = document.createElement('a')
+    //         link.href = URL.createObjectURL(blob)
+    //         link.download = 'tenzin_resume'
+    //         link.click()
+    //         URL.revokeObjectURL(link.href)
+    //       }
+    //       xhr.open('GET', url)
+    //       xhr.send()
+    //     })
+    //     .catch((error) => {
+    //       // Handle any errors
+    //       switch (error.code) {
+    //         case 'storage/object-not-found':
+    //           // File doesn't exist
+    //           break
+    //         case 'storage/unauthorized':
+    //           // User doesn't have permission to access the object
+    //           break
+    //         case 'storage/canceled':
+    //           // User canceled the upload
+    //           break
+    //         case 'storage/unknown':
+    //           // Unknown error occurred, inspect the server response
+    //           break
+    //         default:
+    //           break
+    //       }
+    //     })
+    // },
   },
 }
 </script>

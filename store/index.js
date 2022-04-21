@@ -10,41 +10,14 @@ export const state = () => ({
   // data project
   projects: [
     {
-      areaID: 1, 
-      projectID: 11,
-      title: 'จังหวัด...',
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim massa, blandit sed hendrerit ac, imperdiet rutrum diam. Etiam sed urna sed dui facilisis scelerisque a eu orci. Nulla blandit turpis vitae turpis suscipit lobortis. Curabitur porta vestibulum eleifend. Suspendisse potenti. Fusce porta porttitor ornare. Donec aliquet egestas enim, sit amet lacinia lorem scelerisque vel. In urna lectus, euismod et tempor at, fermentum vitae nisi. Praesent lacinia dolor cursus, convallis magna et, posuere lectus. Proin ac posuere nisi. \
-Praesent eget massa et nisi volutpat faucibus sit amet id risus. Ut dapibus efficitur magna, ut tristique lorem venenatis nec. In iaculis malesuada tincidunt. Proin vestibulum ipsum sed erat vehicula, ut tristique urna varius. Mauris facilisis neque eget nisl commodo dignissim in at tortor. Etiam a tellus vel turpis consequat vestibulum. Aliquam dignissim libero ac ligula malesuada, commodo tempor eros vehicula. Nulla auctor scelerisque nunc, at efficitur nunc feugiat et. Ut eu erat tortor. Nullam semper sem eleifend magna varius, ut venenatis felis varius. Nam tincidunt maximus sapien, id bibendum est hendrerit ut. Maecenas sapien est, suscipit ac nulla accumsan, egestas pharetra nisi. Sed non erat egestas, aliquam ipsum ac, tincidunt sem.',
-      coverimg: 'https://i.imgur.com/DHBrzdp.png', // url img from storage
-      urlVideo: 'https://www.youtube.com/watch?v=KfcjTwGy5UU', // url youtube
-      urlPDF: '', // url PDF from storage
-      x: 0, // position on left of image
-      y: 0, // position on top of image
-    },
-    {
-      areaID: 1,
-      projectID: 12,
-      title: 'จังหวัด...2',
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim massa, blandit sed hendrerit ac, imperdiet rutrum diam. Etiam sed urna sed dui facilisis scelerisque a eu orci. Nulla blandit turpis vitae turpis suscipit lobortis. Curabitur porta vestibulum eleifend. Suspendisse potenti. Fusce porta porttitor ornare. Donec aliquet egestas enim, sit amet lacinia lorem scelerisque vel. In urna lectus, euismod et tempor at, fermentum vitae nisi. Praesent lacinia dolor cursus, convallis magna et, posuere lectus. Proin ac posuere nisi. \
-Praesent eget massa et nisi volutpat faucibus sit amet id risus. Ut dapibus efficitur magna, ut tristique lorem venenatis nec. In iaculis malesuada tincidunt. Proin vestibulum ipsum sed erat vehicula, ut tristique urna varius. Mauris facilisis neque eget nisl commodo dignissim in at tortor. Etiam a tellus vel turpis consequat vestibulum. Aliquam dignissim libero ac ligula malesuada, commodo tempor eros vehicula. Nulla auctor scelerisque nunc, at efficitur nunc feugiat et. Ut eu erat tortor. Nullam semper sem eleifend magna varius, ut venenatis felis varius. Nam tincidunt maximus sapien, id bibendum est hendrerit ut. Maecenas sapien est, suscipit ac nulla accumsan, egestas pharetra nisi. Sed non erat egestas, aliquam ipsum ac, tincidunt sem.',
-      coverimg: 'https://i.imgur.com/DHBrzdp.png', // url img from storage
-      urlVideo: 'https://www.youtube.com/watch?v=KfcjTwGy5UU',
-      urlPDF: '', // url PDF from storage
-      x: 300, // position on left of image
-      y: 120, // position on top of image
-    },
-    {
       areaID: 6,
       projectID: 61,
       title: 'โรงเรียนร้องแหย่งวิทยาคม วัดวุฒิมงคล จังหวัดแพร่',
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim massa, blandit sed hendrerit ac, imperdiet rutrum diam. Etiam sed urna sed dui facilisis scelerisque a eu orci. Nulla blandit turpis vitae turpis suscipit lobortis. Curabitur porta vestibulum eleifend. Suspendisse potenti. Fusce porta porttitor ornare. Donec aliquet egestas enim, sit amet lacinia lorem scelerisque vel. In urna lectus, euismod et tempor at, fermentum vitae nisi. Praesent lacinia dolor cursus, convallis magna et, posuere lectus. Proin ac posuere nisi. \
-Praesent eget massa et nisi volutpat faucibus sit amet id risus. Ut dapibus efficitur magna, ut tristique lorem venenatis nec. In iaculis malesuada tincidunt. Proin vestibulum ipsum sed erat vehicula, ut tristique urna varius. Mauris facilisis neque eget nisl commodo dignissim in at tortor. Etiam a tellus vel turpis consequat vestibulum. Aliquam dignissim libero ac ligula malesuada, commodo tempor eros vehicula. Nulla auctor scelerisque nunc, at efficitur nunc feugiat et. Ut eu erat tortor. Nullam semper sem eleifend magna varius, ut venenatis felis varius. Nam tincidunt maximus sapien, id bibendum est hendrerit ut. Maecenas sapien est, suscipit ac nulla accumsan, egestas pharetra nisi. Sed non erat egestas, aliquam ipsum ac, tincidunt sem.',
+      content: "รอข้อมูล",
       coverimg: 'https://i.imgur.com/pA8ALhe.png', // url img from storage
-      urlVideo: 'https://www.youtube.com/watch?v=57ZNaI0ZTqg', // url youtube
-      urlPDF: '', // url PDF from storage
+      urlVideo: 'https://www.youtube.com/watch?v=57ZNaI0ZTqg',
+      Downloadurlvideo: 'https://www.ssyoutube.com/watch?v=57ZNaI0ZTqg',
+      urlPDF: 'https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%81%E0%B8%84%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B8%97%E0%B8%B5%E0%B9%88%206%2F%E0%B8%87%E0%B8%9A.64.%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%A3%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2%E0%B8%81%E0%B8%A5%E0%B9%84%E0%B8%81%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%B2%E0%B8%99%E0%B8%87%E0%B8%B2%E0%B8%99_%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B9%81.pdf?alt=media&token=91986162-7687-445d-916b-0fa44f240715', // url PDF from storage
       x: 190, // position on left of image
       y: 354, // position on top of image
     },
