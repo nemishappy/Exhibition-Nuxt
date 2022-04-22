@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div v-if="projectLoaded" class="box">
     <v-container>
       <div class="mini-spacer-30">
         <v-row justify="center">
@@ -45,6 +45,7 @@
       </div>
     </v-container>
   </div>
+  <div v-else></div>
 </template>
 
 <script>
@@ -60,24 +61,36 @@ export default {
   data() {
     return {
       routeID: '',
-      project: {},
+      // project: {},
     }
   },
-  created() {
+  computed: {
+    projectLoaded() {
+      return this.$store.getters.getProjectLoaded
+    },
+    project() {
+      return this.$store.getters.getProject
+    },
+  },
+  async created() {
     this.routeID = this.$route.params.pid
-    var store = this.$store.getters.getProjects.filter(
-      (project) =>
-        project.areaID == this.$route.params.id &&
-        project.projectID == this.routeID
-    )
-    // console.log(store.length)
-    if (store.length == 0) {
-      store = this.$store.getters.getProjects.filter(
-        (project) => project.areaID === 1 && project.projectID == this.routeID
-      )
-    }
-    this.project = store[0]
-    // console.log(this.project)
+    // var store = this.$store.getters.getProjects.filter(
+    //   (project) => project.projectID == this.routeID
+    // )
+    this.$store.dispatch('loadProject', {
+      id: this.$route.params.id,
+      pid: this.routeID,
+    })
+    // if (store.length == 0) {
+    //   await this.$store.dispatch('loadProject', {
+    //     id: this.$route.params.id,
+    //     pid: this.routeID,
+    //   })
+    //   var store = await this.$store.getters.getProjects.filter(
+    //     (project) => project.projectID == this.routeID
+    //   )
+    // }
+    // this.project = store[0]
   },
   methods: {
     openDialog() {
@@ -101,34 +114,32 @@ export default {
     },
 
     async downloadPDF() {
-      // var httpsReference = this.$fire.storage.refFromURL(this.project.urlPDF)
-      // await httpsReference
-      //   .getDownloadURL()
-      //   .then((url) => {
-      //     // `url` is the download URL for 'images/stars.jpg'
-      //     console.log(url);
-      //     // This can be downloaded directly:
-      //     var xhr = new XMLHttpRequest()
-      //     xhr.responseType = 'blob'
-      //     xhr.onload = (event) => {
-      //       var blob = xhr.response
-      //     }
-      //     xhr.open('GET', url)
-      //     xhr.send()
-
-      //   })
-      //   .catch((error) => {
-      //     // Handle any errors
-      //     console.log(error);
-      //   })
-      var xhr = new XMLHttpRequest()
-      xhr.responseType = 'blob'
-      xhr.onload = (event) => {
-        var blob = xhr.response
-      }
-      xhr.open('GET', this.project.urlPDF)
-      xhr.send()
-      
+      var httpsReference = this.$fire.storage.refFromURL(this.project.urlPDF)
+      await httpsReference
+        .getDownloadURL()
+        .then((url) => {
+          // `url` is the download URL for 'images/stars.jpg'
+          console.log(url)
+          // This can be downloaded directly:
+          var xhr = new XMLHttpRequest()
+          xhr.responseType = 'blob'
+          xhr.onload = (event) => {
+            var blob = xhr.response
+          }
+          xhr.open('GET', url)
+          xhr.send()
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.log(error)
+        })
+      // var xhr = new XMLHttpRequest()
+      // xhr.responseType = 'blob'
+      // xhr.onload = (event) => {
+      //   var blob = xhr.response
+      // }
+      // xhr.open('GET', this.project.urlPDF)
+      // xhr.send()
     },
   },
 }

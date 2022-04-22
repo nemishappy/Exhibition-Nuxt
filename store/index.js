@@ -8,20 +8,19 @@ export const state = () => ({
     ndAction: '',
   },
   projectLoaded: false,
-  projects: [
-    // {
-    //   areaID: 6,
-    //   projectID: 61,
-    //   title: 'โรงเรียนร้องแหย่งวิทยาคม วัดวุฒิมงคล จังหวัดแพร่',
-    //   content: "รอข้อมูล",
-    //   coverimg: 'https://i.imgur.com/pA8ALhe.png', // url img from storage
-    //   urlVideo: 'https://www.youtube.com/watch?v=57ZNaI0ZTqg',
-    //   Downloadurlvideo: 'https://www.ssyoutube.com/watch?v=57ZNaI0ZTqg',
-    //   urlPDF: 'https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%81%E0%B8%84%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B8%97%E0%B8%B5%E0%B9%88%206%2F%E0%B8%87%E0%B8%9A.64.%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%A3%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2%E0%B8%81%E0%B8%A5%E0%B9%84%E0%B8%81%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%B2%E0%B8%99%E0%B8%87%E0%B8%B2%E0%B8%99_%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B9%81.pdf?alt=media&token=91986162-7687-445d-916b-0fa44f240715', // url PDF from storage
-    //   x: 190, // position on left of image
-    //   y: 354, // position on top of image
-    // },
-  ],
+  projects: [],
+  project: {
+    areaID: null,
+    projectID: null,
+    title: '',
+    content: '',
+    urlImg: '', // url img from storage
+    urlVideo: '',
+    downloadurlvideo: '',
+    urlPDF: '',
+    x: 0, // position on left of image
+    y: 0, // position on top of image
+  },
 })
 
 export const getters = {
@@ -34,9 +33,12 @@ export const getters = {
   getProjects(state) {
     return [...state.projects]
   },
-  getProjectLoaded(state){
+  getProject(state) {
+    return state.project
+  },
+  getProjectLoaded(state) {
     return state.projectLoaded
-  }
+  },
 }
 
 export const mutations = {
@@ -55,8 +57,11 @@ export const mutations = {
   CLEAR_PROJECTS(state) {
     state.projects = []
   },
-  SET_PROJECTLOADED(state, payload){
+  SET_PROJECTLOADED(state, payload) {
     state.projectLoaded = payload
+  },
+  SET_PROJECT(state, payload) {
+    state.project = { ...state.project, ...payload }
   },
 }
 
@@ -70,20 +75,42 @@ export const actions = {
   setDialog({ commit }, data) {
     commit('SET_DIALOG', data)
   },
-  async setProjectInArea({commit}, data){
+  async setProjectInArea({ commit }, data) {
     commit('SET_PROJECTLOADED', false)
     commit('CLEAR_PROJECTS')
-    const dataBase = this.$fire.firestore
-      .collection(`area${data}`)
+    const dataBase = this.$fire.firestore.collection(`area${data}`)
     const dbResults = await dataBase.get()
     dbResults.forEach((doc) => {
       commit('ADD_PROJECT', doc.data())
-      console.log(doc.data());
+      console.log(doc.data())
     })
 
     commit('SET_PROJECTLOADED', true)
   },
-  async loadProject(){
+  async loadProject({ commit, getters }, data) {
+    commit('SET_PROJECTLOADED', false)
+    if (getters.getProjects.length == 0) {
+      await this.$fire.firestore
+        .collection(`area${data.id}`)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            if (doc.data().projectID == data.pid)
+              commit('SET_PROJECT', doc.data())
+            console.log(doc.id, ' => ', doc.data())
+          })
+        })
+        .catch((error) => {
+          console.log('Error getting documents: ', error)
+        })
+    } else {
+      var store = getters.getProjects.filter(
+        (project) => project.projectID == data.id
+      )
+      commit('SET_PROJECT', store[0])
+    }
 
+    commit('SET_PROJECTLOADED', true)
   },
 }
