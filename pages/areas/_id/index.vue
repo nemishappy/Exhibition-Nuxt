@@ -8,20 +8,21 @@
               <h2 class="ui-title font-weight-bold">
                 ภาคการปกครองที่ {{ routeID }}
               </h2>
-              <p>มีพื้นที่งานจัดแสดงทั้งหมด 2 พื้นที่</p>
+              <p>มีพื้นที่งานจัดแสดงทั้งหมด {{projects.length}} พื้นที่</p>
             </div>
           </v-col>
         </v-row>
       </div>
       <!-- <div v-html="pin" class="svg-icon"></div> -->
-      <div class="main-box d-flex justify-center">
+      <div v-if="projectLoaded" class="main-box d-flex justify-center">
         <div class="img-box">
           <img
             :src="require(`~/assets/images/areas/1x/${routeID}.png`)"
             class="imgarea my-4"
             ref="imgarea"
+            @load="initPin()"
           />
-          <div class="all-pin">
+          <div class="all-pin" >
             <v-menu
               v-model="project.isActive"
               content-class="my-menu"
@@ -52,12 +53,12 @@
                 <v-list>
                   <v-list-item>
                     <img
-                      v-if="!project.coverimg"
+                      v-if="!project.urlImg"
                       src="~assets/images/cover-demo.png"
                       width="200px"
                       alt=""
                     />
-                    <img v-else :src="project.coverimg" width="200px" alt="" />
+                    <img v-else :src="project.urlImg" width="200px" alt="" />
 
                     <v-list-item-content class="pa-4">
                       <v-list-item-title>{{ project.title }}</v-list-item-title>
@@ -95,31 +96,37 @@ export default {
       projects: [],
     }
   },
-  created() {
+  computed: {
+    projectLoaded() {
+      return this.$store.getters.getProjectLoaded
+    },
+  },
+  async created() {
     this.routeID = this.$route.params.id
+    await this.$store.dispatch('setProjectInArea', this.routeID)
     var projectOnDB = JSON.parse(
       JSON.stringify(this.$store.getters.getProjects)
     )
-    projectOnDB.forEach((data) => {
+
+    await projectOnDB.forEach((data) => {
       var obj = data
       obj['isActive'] = false
       this.projects.push(obj)
     })
-    // this.projects =
   },
   mounted() {
-    this.$nextTick(() => {
-      this.initPin()
-    })
+    // this.$nextTick(() => {
+    //   this.initPin()
+    // })
   },
   methods: {
     async initPin() {
       this.projects.forEach((element) => {
+        console.log(this.$refs[`pin${element.projectID}`][0])
         var $ref = this.$refs[`pin${element.projectID}`][0]
         $ref.style.left = element.x + 'px'
         $ref.style.top = element.y + 'px'
       })
-      // console.log(this.$refs)
     },
     toEvent(index) {
       // this.projects[index].isActive = false

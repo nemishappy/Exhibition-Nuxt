@@ -25,20 +25,20 @@
               <p>{{ project.content }}</p>
             </v-responsive>
             <ul>
-                <v-btn
-                  class="action no-uppercase"
-                  text
-                  color="primary"
-                  :href="project.Downloadurlvideo"
-                  >ดาวน์โหลดคลิปวิดีโอ</v-btn
-                >
-                <v-btn
-                  class="action no-uppercase"
-                  text
-                  color="primary"
-                  @click.prevent="openDialog"
-                  >ดาวน์โหลดเอกสาร</v-btn
-                >
+              <v-btn
+                class="action no-uppercase"
+                text
+                color="primary"
+                :href="project.downloadUrlVideo"
+                >ดาวน์โหลดคลิปวิดีโอ</v-btn
+              >
+              <v-btn
+                class="action no-uppercase"
+                text
+                color="primary"
+                @click.prevent="openDialog"
+                >ดาวน์โหลดเอกสาร</v-btn
+              >
             </ul>
           </div>
         </div>
@@ -100,47 +100,36 @@ export default {
       })
     },
 
-    // downloadPDF() {
-    //   const resumeRef = project.urlPDF
-    //   resumeRef
-    //     .getDownloadURL()
-    //     .then((url) => {
-    //       // `url` is the download URL
-    //       console.log(url)
-    //       // This can be downloaded directly:
-    //       const xhr = new XMLHttpRequest()
-    //       xhr.responseType = 'blob'
-    //       xhr.onload = function () {
-    //         const blob = xhr.response
-    //         const link = document.createElement('a')
-    //         link.href = URL.createObjectURL(blob)
-    //         link.download = 'tenzin_resume'
-    //         link.click()
-    //         URL.revokeObjectURL(link.href)
-    //       }
-    //       xhr.open('GET', url)
-    //       xhr.send()
-    //     })
-    //     .catch((error) => {
-    //       // Handle any errors
-    //       switch (error.code) {
-    //         case 'storage/object-not-found':
-    //           // File doesn't exist
-    //           break
-    //         case 'storage/unauthorized':
-    //           // User doesn't have permission to access the object
-    //           break
-    //         case 'storage/canceled':
-    //           // User canceled the upload
-    //           break
-    //         case 'storage/unknown':
-    //           // Unknown error occurred, inspect the server response
-    //           break
-    //         default:
-    //           break
-    //       }
-    //     })
-    // },
+    async downloadPDF() {
+      // var httpsReference = this.$fire.storage.refFromURL(this.project.urlPDF)
+      // await httpsReference
+      //   .getDownloadURL()
+      //   .then((url) => {
+      //     // `url` is the download URL for 'images/stars.jpg'
+      //     console.log(url);
+      //     // This can be downloaded directly:
+      //     var xhr = new XMLHttpRequest()
+      //     xhr.responseType = 'blob'
+      //     xhr.onload = (event) => {
+      //       var blob = xhr.response
+      //     }
+      //     xhr.open('GET', url)
+      //     xhr.send()
+
+      //   })
+      //   .catch((error) => {
+      //     // Handle any errors
+      //     console.log(error);
+      //   })
+      var xhr = new XMLHttpRequest()
+      xhr.responseType = 'blob'
+      xhr.onload = (event) => {
+        var blob = xhr.response
+      }
+      xhr.open('GET', this.project.urlPDF)
+      xhr.send()
+      
+    },
   },
 }
 </script>

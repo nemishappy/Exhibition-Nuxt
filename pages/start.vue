@@ -255,7 +255,7 @@ export default {
         (index + 1) +
         '.png')
     }
-
+    
     this.$nextTick(() => {
       this.$store.dispatch('startOverlay')
       timeoutId = setTimeout(() => {
