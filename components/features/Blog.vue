@@ -161,10 +161,10 @@ export default {
     }
   }
   .blog-title {
-    color: $dark !important;
+    color: #263238 !important;
     line-height: 22px;
     &:hover {
-      color: $accent !important;
+      color: #607df9 !important;
     }
   }
 }

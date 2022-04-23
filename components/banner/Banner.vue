@@ -69,7 +69,7 @@ export default {
 }
 
 .banner-wrapper {
-  background: $accent;
+  background: #607df9;
   padding: 20px 0 20px;
   min-height: 600px;
   display: flex;

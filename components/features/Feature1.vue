@@ -137,7 +137,7 @@ export default {
   .icon-round {
     font-size: 45px;
     width: 80px;
-    color: $accent;
+    color: #607df9;
     line-height: 80px;
     text-align: center;
     display: inline-block;

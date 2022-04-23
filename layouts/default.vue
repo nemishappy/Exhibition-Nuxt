@@ -53,7 +53,7 @@ export default {
 
 <style lang="scss">
 .v-application {
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Prompt', sans-serif !important;
 }
 .text-title {
   font-size: 20px;

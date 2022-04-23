@@ -95,15 +95,15 @@ export default {
 
 .dark-link {
   text-decoration: none;
-  color: $heading-color !important;
+  color: #3e4555 !important;
   &:hover {
-    color: $primary !important;
+    color: #316ce8  !important;
   }
 }
 .link {
   text-decoration: none;
   &:hover {
-    color: $primary !important;
+    color: #316ce8  !important;
   }
 }
 
@@ -117,12 +117,12 @@ export default {
     border-radius: 100%;
     margin: 0 5px;
     transition: 0.2s ease-in;
-    color: $dark;
-    background: $light;
+    color: #263238;
+    background: #f4f8fa;
     &:hover {
       transform: translate3d(0px, -5px, 0px);
-      background: $blue;
-      color: $white;
+      background: #0164d3;
+      color: white;
     }
   }
 }
