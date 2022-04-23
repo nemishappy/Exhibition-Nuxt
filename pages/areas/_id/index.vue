@@ -1,79 +1,100 @@
 <template>
   <div>
-    <h2>ภาคการปกครองที่ {{ routeID }}</h2>
-    <!-- <div v-html="pin" class="svg-icon"></div> -->
-    <div class="main-box d-flex justify-center">
-      <div class="img-box">
-        <img
-          :src="require(`~/assets/images/areas/1x/${routeID}.png`)"
-          class="imgarea my-4"
-          ref="imgarea"
-        />
-        <div class="all-pin">
-          <v-menu
-            v-model="project.isActive"
-            content-class="my-menu"
-            transition="slide-x-transition"
-            bottom
-            offset-x
-            :close-on-content-click="false"
-            v-for="(project, index) in projects"
-            :key="index"
-          >
-            <template v-slot:activator="{ on: menu, attrs }">
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on: tooltip }">
-                  <div
-                    class="pin"
-                    :ref="'pin' + project.projectID"
-                    v-bind="attrs"
-                    v-on="{ ...tooltip, ...menu }"
-                  >
-                    <v-icon color="red">mdi-map-marker</v-icon>
-                  </div>
-                </template>
-                <span>{{ project.title }}<br />คลิกเพื่ออ่านเพิ่มเติม</span>
-              </v-tooltip>
-            </template>
-
-            <v-card max-width="400" class="mx-auto">
-              <v-list>
-                <v-list-item>
-                  <img
-                    v-if="!project.coverimg"
-                    src="~assets/images/cover-demo.png"
-                    width="200px"
-                    alt=""
-                  />
-                  <img v-else :src="project.coverimg" width="200px" alt="" />
-
-                  <v-list-item-content class="pa-4">
-                    <v-list-item-title>{{ project.title }}</v-list-item-title>
-                    <v-list-item-subtitle class="content text-wrap">
-                      {{ project.content }}
-                    </v-list-item-subtitle>
-                    <v-btn
-                      class="no-uppercase align-self-end"
-                      color="blue"
-                      text
-                      @click="toEvent(index)"
-                      >readmore</v-btn
+    <v-container v-if="projectLoaded">
+      <div class="mini-spacer-30">
+        <v-row justify="center">
+          <v-col cols="12" sm="10" md="9" lg="7">
+            <div class="text-center">
+              <h2 class="ui-title font-weight-bold">
+                ภาคการปกครองที่ {{ routeID }}
+              </h2>
+              <p>มีพื้นที่งานจัดแสดงทั้งหมด {{ projects.length }} พื้นที่</p>
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+      <!-- <div v-html="pin" class="svg-icon"></div> -->
+      <div class="main-box d-flex justify-center">
+        <div class="img-box">
+          <img
+            :src="require(`~/assets/images/areas/1x/${routeID}.png`)"
+            class="imgarea my-4"
+            ref="imgarea"
+            @load="initPin()"
+          />
+          <div class="all-pin">
+            <v-menu
+              v-model="project.isActive"
+              content-class="my-menu"
+              transition="slide-x-transition"
+              bottom
+              offset-x
+              :close-on-content-click="false"
+              v-for="(project, index) in projects"
+              :key="index"
+            >
+              <template v-slot:activator="{ on: menu, attrs }">
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on: tooltip }">
+                    <div
+                      class="pin"
+                      :ref="'pin' + project.projectID"
+                      v-bind="attrs"
+                      v-on="{ ...tooltip, ...menu }"
                     >
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-menu>
+                      <v-icon color="error">mdi-map-marker</v-icon>
+                    </div>
+                  </template>
+                  <span>{{ project.title }}<br />คลิกเพื่ออ่านเพิ่มเติม</span>
+                </v-tooltip>
+              </template>
+
+              <v-card max-width="400" class="mx-auto">
+                <v-list>
+                  <v-list-item>
+                    <img
+                      v-if="!project.urlImg"
+                      src="~assets/images/cover-demo.png"
+                      width="200px"
+                      alt=""
+                    />
+                    <img v-else :src="project.urlImg" width="200px" alt="" />
+
+                    <v-list-item-content class="pa-4">
+                      <v-list-item-title>{{ project.title }}</v-list-item-title>
+                      <v-list-item-subtitle class="content text-wrap">
+                        {{ project.content }}
+                      </v-list-item-subtitle>
+                      <v-btn
+                        class="no-uppercase align-self-end"
+                        color="blue"
+                        text
+                        @click="toEvent(index)"
+                        >readmore</v-btn
+                      >
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </v-menu>
+          </div>
         </div>
       </div>
+    </v-container>
+    <div v-else>
+      <Overlay />
     </div>
   </div>
 </template>
 
 <script>
 import pin from '~/assets/svg/pin.svg?raw'
+import Overlay from '~/components/Overlay'
 
 export default {
+  components: {
+    Overlay,
+  },
   data() {
     return {
       routeID: '',
@@ -82,31 +103,47 @@ export default {
       projects: [],
     }
   },
-  created() {
+  computed: {
+    projectLoaded() {
+      return this.$store.getters.getProjectLoaded
+    },
+  },
+  async created() {
     this.routeID = this.$route.params.id
+    this.$store.dispatch('startOverlay')
+    await this.$store.dispatch('setProjectInArea', this.routeID)
     var projectOnDB = JSON.parse(
       JSON.stringify(this.$store.getters.getProjects)
     )
-    projectOnDB.forEach((data) => {
+
+    await projectOnDB.forEach((data) => {
       var obj = data
       obj['isActive'] = false
       this.projects.push(obj)
     })
-    // this.projects =
   },
   mounted() {
-    this.$nextTick(() => {
-      this.initPin()
-    })
+    // this.$nextTick(() => {
+    //   this.initPin()
+    // })
+    // this.$nextTick(() => {
+    //   this.$store.dispatch('startOverlay')
+    //   setTimeout(() => {
+    //     this.$store.dispatch('finishOverlay')
+    //   }, 3000)
+    // })
   },
+  
   methods: {
     async initPin() {
+      this.$nuxt.$loading.start()
       this.projects.forEach((element) => {
+        console.log(this.$refs[`pin${element.projectID}`][0])
         var $ref = this.$refs[`pin${element.projectID}`][0]
         $ref.style.left = element.x + 'px'
         $ref.style.top = element.y + 'px'
       })
-      // console.log(this.$refs)
+      this.$nuxt.$loading.finish()
     },
     toEvent(index) {
       // this.projects[index].isActive = false

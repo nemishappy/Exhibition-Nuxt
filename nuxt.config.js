@@ -17,10 +17,21 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,400;0,700;1,400;1,700&display=swap' },],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+      },
+    ],
   },
 
-  loading: '~/components/LoadingBar.vue',
+  loading: {
+    color: 'DodgerBlue',
+    height: '5px',
+    continuous: true,
+    duration: 3000,
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
@@ -39,7 +50,28 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: 'AIzaSyAOYG98M7oDw0W2lgdhRo8X1jzl7olk5Rw',
+          authDomain: 'exhibition-thaihealth.firebaseapp.com',
+          projectId: 'exhibition-thaihealth',
+          storageBucket: 'exhibition-thaihealth.appspot.com',
+          messagingSenderId: '915621515107',
+          appId: '1:915621515107:web:48fcb52cd40ec115b90d56',
+          measurementId: 'G-JLR1M08D1X',
+        },
+        services: {
+          auth: true,
+          firestore: true,
+          functions: true,
+          storage: true,
+        },
+      },
+    ],
+  ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

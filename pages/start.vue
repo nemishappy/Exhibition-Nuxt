@@ -1,41 +1,47 @@
 <template>
-  <div v-if="loadAreas" class="box">
-    <!-- gets re-positioned in myInit(); -->
-    <h1 class="mb-4">แผนที่แบ่งภาคการปกครองคณะสงฆ์
-    </h1>
-    <canvas id="myCanvas" ref="myCanvas"></canvas>
-    <img
-      src="~/assets/images/Thailand_Map.png"
-      usemap="#imgmap_css_container_imgmap201293016112"
-      class="imgmap_css_container"
-      alt="imgmap201293016112"
-      id="img-imgmap201293016112"
-      ref="img-imgmap201293016112"
-      width="701"
-      height="1280"
-      @load="myInit"
-    />
-
-    <map name="imgmap_css_container_imgmap201293016112">
-      <nuxt-link
-        v-for="(area, index) in areas"
-        :key="index"
-        :to="{ name: 'areas-id', params: { id: area.path } }"
-      >
-        <area
-          @mouseover="drawArea(index)"
-          @mouseout="myLeave()"
-          alt="imgmap201293016112-0"
-          :title="area.title"
-          :coords="area.coords"
-          shape="poly"
+  <v-container
+    ><div v-if="loadAreas" class="box">
+      <!-- gets re-positioned in myInit(); -->
+      <center>
+        <div class="mb-4">
+          <h2 class="mb-4">แผนที่แบ่งภาคการปกครองคณะสงฆ์</h2>
+          <p>รอข้อมูลเพิ่มเติม</p>
+        </div>
+        <canvas id="myCanvas" ref="myCanvas"></canvas>
+        <img
+          src="~/assets/images/Thailand_Map.png"
+          usemap="#imgmap_css_container_imgmap201293016112"
+          class="imgmap_css_container"
+          alt="imgmap201293016112"
+          id="img-imgmap201293016112"
+          ref="img-imgmap201293016112"
+          width="701"
+          height="1280"
+          @load="myInit"
         />
-      </nuxt-link>
-    </map>
-  </div>
-  <div v-else>
-    <Overlay />
-  </div>
+
+        <map name="imgmap_css_container_imgmap201293016112">
+          <nuxt-link
+            v-for="(area, index) in areas"
+            :key="index"
+            :to="{ name: 'areas-id', params: { id: area.path } }"
+          >
+            <area
+              @mouseover="drawArea(index)"
+              @mouseout="myLeave()"
+              alt="imgmap201293016112-0"
+              :title="area.title"
+              :coords="area.coords"
+              shape="poly"
+            />
+          </nuxt-link>
+        </map>
+      </center>
+    </div>
+    <div v-else>
+      <Overlay />
+    </div>
+  </v-container>
 </template>
 
 <script>
@@ -311,7 +317,7 @@ export default {
 /* div {
   background-color: gray;
 } */
-.box{
+.box {
   height: 100%;
 }
 canvas {

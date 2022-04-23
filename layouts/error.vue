@@ -1,12 +1,9 @@
 <template>
   <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
+    <Banner v-if="error.statusCode === 404"/>
     <h1 v-else>
       {{ otherError }}
     </h1>
-    <NuxtLink to="/"> Home page </NuxtLink>
   </v-app>
 </template>
 
@@ -19,6 +16,9 @@ export default {
       type: Object,
       default: null,
     },
+  },
+  components: {
+    Banner: () => import('@/components/banner/Banner404'),
   },
   data() {
     return {

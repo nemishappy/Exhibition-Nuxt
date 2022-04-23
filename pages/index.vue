@@ -1,23 +1,7 @@
 <template>
-  <div class="bg">
-    <v-container>
-      <h1>นิทรรศการออนไลน์</h1>
-      <v-img
-        class="d-flex align-self-center my-4"
-        lazy-src="https://picsum.photos/id/11/10/6"
-        max-height="337.50"
-        max-width="600"
-        src="https://picsum.photos/id/11/500/300"
-      ></v-img>
-      <v-btn
-        class="d-flex align-self-center no-uppercase "
-        color="primary"
-        elevation="2"
-        large
-        rounded
-        to="/start"
-      >Start</v-btn>
-    </v-container>
+  <div>
+    <Banner />
+    <Feature/>
   </div>
 </template>
 
@@ -25,6 +9,10 @@
 export default {
   name: 'IndexPage',
   methods: {},
+  components: {
+    Banner: () => import('@/components/banner/Banner'),
+    Feature: () => import('@/components/features/CustomComponents'),
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -55,7 +43,7 @@ export default {
     max-width: 800px;
   }
 }
-.v-btn__content{
+.v-btn__content {
   font-size: 20px;
   font-weight: bold;
   padding: 10px;

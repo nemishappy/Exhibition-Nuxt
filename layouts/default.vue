@@ -1,43 +1,21 @@
 <template>
   <v-app>
-    <v-app-bar v-if="!isStartPage" fixed app>
-      <img
-        class="mr-3 start"
-        @click="toHome"
-        src="~/assets/images/logo.png"
-        height="40"
-      />
-      <v-toolbar-title class="start" v-text="title" @click="toHome" />
-      <v-spacer />
-      <v-btn v-show="$route.name == 'start' ? false : true" text @click="back">
-        <v-icon>mdi-arrow-left</v-icon>
-        <div>ย้อนกลับ</div>
-      </v-btn>
-    </v-app-bar>
-    <v-main v-if="!isStartPage">
-      <v-container>
-        <v-card class="pa-4" elevation="10" tile>
-          <Nuxt />
-        </v-card>
-      </v-container>
-    </v-main>
-    <v-main v-else>
+    <Header />
+    <v-main>
       <Nuxt />
     </v-main>
-
-    <v-footer app>
-      <span
-        >&copy;
-        {{ new Date().getFullYear() }} สำนักงานกองทุนสนับสนุนการสร้างเสริมสุขภาพ
-        (สสส.)</span
-      >
-    </v-footer>
+    <Footer />
   </v-app>
 </template>
 
 <script>
+// import Header from '~/layouts/sections/Header'
 export default {
   name: 'DefaultLayout',
+  components: {
+    Header: () => import('@/layouts/sections/Header'),
+    Footer: () => import('@/layouts/sections/Footer'),
+  },
   created() {
     this.checkRoute()
   },
@@ -86,10 +64,21 @@ export default {
 }
 .container {
   padding: 0 12px !important;
-  margin-bottom: 24px !important;
   height: 100%;
 }
 .start {
   cursor: pointer;
+}
+
+.mini-spacer {
+  padding: 75px 0;
+}
+
+.mini-spacer-50 {
+  padding: 50px 0;
+}
+
+.mini-spacer-30 {
+  padding: 50px 0;
 }
 </style>

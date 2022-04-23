@@ -7,48 +7,20 @@ export const state = () => ({
     stAction: '',
     ndAction: '',
   },
-  // data project
-  projects: [
-    {
-      areaID: 1, 
-      projectID: 11,
-      title: 'จังหวัด...',
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim massa, blandit sed hendrerit ac, imperdiet rutrum diam. Etiam sed urna sed dui facilisis scelerisque a eu orci. Nulla blandit turpis vitae turpis suscipit lobortis. Curabitur porta vestibulum eleifend. Suspendisse potenti. Fusce porta porttitor ornare. Donec aliquet egestas enim, sit amet lacinia lorem scelerisque vel. In urna lectus, euismod et tempor at, fermentum vitae nisi. Praesent lacinia dolor cursus, convallis magna et, posuere lectus. Proin ac posuere nisi. \
-Praesent eget massa et nisi volutpat faucibus sit amet id risus. Ut dapibus efficitur magna, ut tristique lorem venenatis nec. In iaculis malesuada tincidunt. Proin vestibulum ipsum sed erat vehicula, ut tristique urna varius. Mauris facilisis neque eget nisl commodo dignissim in at tortor. Etiam a tellus vel turpis consequat vestibulum. Aliquam dignissim libero ac ligula malesuada, commodo tempor eros vehicula. Nulla auctor scelerisque nunc, at efficitur nunc feugiat et. Ut eu erat tortor. Nullam semper sem eleifend magna varius, ut venenatis felis varius. Nam tincidunt maximus sapien, id bibendum est hendrerit ut. Maecenas sapien est, suscipit ac nulla accumsan, egestas pharetra nisi. Sed non erat egestas, aliquam ipsum ac, tincidunt sem.',
-      coverimg: 'https://i.imgur.com/DHBrzdp.png', // url img from storage
-      urlVideo: 'https://www.youtube.com/watch?v=KfcjTwGy5UU', // url youtube
-      urlPDF: '', // url PDF from storage
-      x: 0, // position on left of image
-      y: 0, // position on top of image
-    },
-    {
-      areaID: 1,
-      projectID: 12,
-      title: 'จังหวัด...2',
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim massa, blandit sed hendrerit ac, imperdiet rutrum diam. Etiam sed urna sed dui facilisis scelerisque a eu orci. Nulla blandit turpis vitae turpis suscipit lobortis. Curabitur porta vestibulum eleifend. Suspendisse potenti. Fusce porta porttitor ornare. Donec aliquet egestas enim, sit amet lacinia lorem scelerisque vel. In urna lectus, euismod et tempor at, fermentum vitae nisi. Praesent lacinia dolor cursus, convallis magna et, posuere lectus. Proin ac posuere nisi. \
-Praesent eget massa et nisi volutpat faucibus sit amet id risus. Ut dapibus efficitur magna, ut tristique lorem venenatis nec. In iaculis malesuada tincidunt. Proin vestibulum ipsum sed erat vehicula, ut tristique urna varius. Mauris facilisis neque eget nisl commodo dignissim in at tortor. Etiam a tellus vel turpis consequat vestibulum. Aliquam dignissim libero ac ligula malesuada, commodo tempor eros vehicula. Nulla auctor scelerisque nunc, at efficitur nunc feugiat et. Ut eu erat tortor. Nullam semper sem eleifend magna varius, ut venenatis felis varius. Nam tincidunt maximus sapien, id bibendum est hendrerit ut. Maecenas sapien est, suscipit ac nulla accumsan, egestas pharetra nisi. Sed non erat egestas, aliquam ipsum ac, tincidunt sem.',
-      coverimg: 'https://i.imgur.com/DHBrzdp.png', // url img from storage
-      urlVideo: 'https://www.youtube.com/watch?v=KfcjTwGy5UU',
-      urlPDF: '', // url PDF from storage
-      x: 300, // position on left of image
-      y: 120, // position on top of image
-    },
-    {
-      areaID: 6,
-      projectID: 61,
-      title: 'โรงเรียนร้องแหย่งวิทยาคม วัดวุฒิมงคล จังหวัดแพร่',
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim massa, blandit sed hendrerit ac, imperdiet rutrum diam. Etiam sed urna sed dui facilisis scelerisque a eu orci. Nulla blandit turpis vitae turpis suscipit lobortis. Curabitur porta vestibulum eleifend. Suspendisse potenti. Fusce porta porttitor ornare. Donec aliquet egestas enim, sit amet lacinia lorem scelerisque vel. In urna lectus, euismod et tempor at, fermentum vitae nisi. Praesent lacinia dolor cursus, convallis magna et, posuere lectus. Proin ac posuere nisi. \
-Praesent eget massa et nisi volutpat faucibus sit amet id risus. Ut dapibus efficitur magna, ut tristique lorem venenatis nec. In iaculis malesuada tincidunt. Proin vestibulum ipsum sed erat vehicula, ut tristique urna varius. Mauris facilisis neque eget nisl commodo dignissim in at tortor. Etiam a tellus vel turpis consequat vestibulum. Aliquam dignissim libero ac ligula malesuada, commodo tempor eros vehicula. Nulla auctor scelerisque nunc, at efficitur nunc feugiat et. Ut eu erat tortor. Nullam semper sem eleifend magna varius, ut venenatis felis varius. Nam tincidunt maximus sapien, id bibendum est hendrerit ut. Maecenas sapien est, suscipit ac nulla accumsan, egestas pharetra nisi. Sed non erat egestas, aliquam ipsum ac, tincidunt sem.',
-      coverimg: 'https://i.imgur.com/pA8ALhe.png', // url img from storage
-      urlVideo: 'https://www.youtube.com/watch?v=57ZNaI0ZTqg', // url youtube
-      urlPDF: '', // url PDF from storage
-      x: 190, // position on left of image
-      y: 354, // position on top of image
-    },
-  ],
+  projectLoaded: false,
+  projects: [],
+  project: {
+    areaID: null,
+    projectID: null,
+    title: '',
+    content: '',
+    urlImg: '', // url img from storage
+    urlVideo: '',
+    downloadurlvideo: '',
+    urlPDF: '',
+    x: 0, // position on left of image
+    y: 0, // position on top of image
+  },
 })
 
 export const getters = {
@@ -60,6 +32,12 @@ export const getters = {
   },
   getProjects(state) {
     return [...state.projects]
+  },
+  getProject(state) {
+    return state.project
+  },
+  getProjectLoaded(state) {
+    return state.projectLoaded
   },
 }
 
@@ -73,6 +51,18 @@ export const mutations = {
       ...payload,
     }
   },
+  ADD_PROJECT(state, payload) {
+    state.projects.push(payload)
+  },
+  CLEAR_PROJECTS(state) {
+    state.projects = []
+  },
+  SET_PROJECTLOADED(state, payload) {
+    state.projectLoaded = payload
+  },
+  SET_PROJECT(state, payload) {
+    state.project = { ...state.project, ...payload }
+  },
 }
 
 export const actions = {
@@ -84,5 +74,44 @@ export const actions = {
   },
   setDialog({ commit }, data) {
     commit('SET_DIALOG', data)
+  },
+  async setProjectInArea({ commit }, data) {
+    commit('SET_PROJECTLOADED', false)
+    commit('CLEAR_PROJECTS')
+    const dataBase = this.$fire.firestore.collection(`area${data}`)
+    const dbResults = await dataBase.get()
+    dbResults.forEach((doc) => {
+      commit('ADD_PROJECT', doc.data())
+      console.log(doc.data())
+    })
+
+    commit('SET_PROJECTLOADED', true)
+  },
+  async loadProject({ commit, getters }, data) {
+    commit('SET_PROJECTLOADED', false)
+    if (getters.getProjects.length == 0) {
+      await this.$fire.firestore
+        .collection(`area${data.id}`)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            if (doc.data().projectID == data.pid)
+              commit('SET_PROJECT', doc.data())
+            console.log(doc.id, ' => ', doc.data())
+          })
+        })
+        .catch((error) => {
+          console.log('Error getting documents: ', error)
+        })
+    } else {
+      var store = getters.getProjects.filter(
+        (project) => project.projectID == data.pid
+      )
+      console.log(store);
+      commit('SET_PROJECT', store[0])
+    }
+
+    commit('SET_PROJECTLOADED', true)
   },
 }

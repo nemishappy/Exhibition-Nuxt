@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="getDialog.isShow" max-width="400" >
+  <v-dialog v-model="getDialog.isShow" persistent max-width="400" >
     <v-card>
       <v-card-title>{{ getDialog.title }}</v-card-title>
       <v-card-text v-html="getDialog.message"></v-card-text>
