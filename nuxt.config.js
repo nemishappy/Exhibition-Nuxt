@@ -1,13 +1,13 @@
 import colors from 'vuetify/es5/util/colors'
 
-export default {
+module.exports = {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  target: 'server',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Online Exhibition',
-    title: 'exhibition-nuxt',
+    title: 'พระสร้างสุข PHRASANGSUK',
     htmlAttrs: {
       lang: 'en',
     },

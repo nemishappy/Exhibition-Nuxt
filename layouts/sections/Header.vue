@@ -24,11 +24,6 @@
           <div class="option">
             <NuxtLink to="/projects"> <p>งานนิทรรศการ</p> </NuxtLink>
           </div>
-          <div class="option">
-            <NuxtLink to="/add">
-              <p>เพิ่มข้อมูลงาน</p>
-            </NuxtLink>
-          </div>
         </div>
       </v-container>
     </v-app-bar>
@@ -56,7 +51,7 @@
           <v-list-item>
             <v-list-item-title
               ><div class="option-mobile">
-                <NuxtLink to="/projects">
+                <NuxtLink to="/projects/health-promotion">
                   <p>โครงการสร้างเสริมสุขภาพ</p>
                 </NuxtLink>
               </div></v-list-item-title
@@ -65,7 +60,7 @@
           <v-list-item>
             <v-list-item-title
               ><div class="option-mobile">
-                <NuxtLink to="/projects">
+                <NuxtLink to="/projects/diseases-and-disasters">
                   <p>โครงการเกี่ยวกับโรคติดต่อและภัยพิบัติ</p>
                 </NuxtLink>
               </div></v-list-item-title
@@ -81,7 +76,7 @@
 export default {
   data() {
     return {
-      title: 'นิทรรศการมหาเถรสมาคม',
+      title: 'นิทรรศการพระสร้างสุข',
       isActive: false,
       drawer: false,
       group: null,

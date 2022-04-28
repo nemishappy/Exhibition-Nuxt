@@ -22,6 +22,17 @@
       ></v-text-field>
       <v-text-field v-model="title" label="title" required></v-text-field>
       <v-text-field v-model="content" label="content" required></v-text-field>
+      <v-select
+          v-model="type"
+          :hint="`${type.name}, ${type.tid}`"
+          :items="itemsType"
+          item-text="name"
+          item-value="tid"
+          label="Select Type"
+          persistent-hint
+          return-object
+          single-line
+        ></v-select>
       <v-file-input
         v-model="coverImgFile"
         label="coverimage"
@@ -59,12 +70,17 @@ export default {
   data() {
     return {
       valid: true,
+      itemsType: [
+        { name: 'สร้างเสริมสุขภาพ', tid: 1 },
+        { name: 'โรคติดต่อและภัยพิบัต', tid: 2 },
+      ],
       namework: '',
       id: '',
       areaID: '',
       projectID: '',
       title: '',
       content: '',
+      type: {name: '', tid: 0},
       coverImgFile: null,
       urlImg: '',
       urlVideo: '',
@@ -85,6 +101,7 @@ export default {
           projectID: this.projectID,
           title: this.title,
           content: this.content,
+          type: this.type,
           urlImg: this.urlImg,
           urlVideo: this.urlVideo,
           downloadUrlVideo: this.downloadUrlVideo,
@@ -149,6 +166,7 @@ export default {
         projectID: this.projectID,
         title: this.title,
         content: this.content,
+        type: this.type,
         urlImg: this.urlImg,
         urlVideo: this.urlVideo,
         downloadUrlVideo: this.downloadUrlVideo,
@@ -157,7 +175,7 @@ export default {
         y: this.y,
         viewCount: 0,
       })
-      console.log('done.');
+      console.log('done.')
       this.$nuxt.$loading.finish()
       this.$refs.form.reset()
     },

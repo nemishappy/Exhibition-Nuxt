@@ -24,22 +24,7 @@
         ----------------------------------------------- -->
         <v-row class="mt-13">
           <v-col cols="12" md="6" lg="4">
-            <!-- <v-card class="portfolio-card overflow-hidden">
-              <div class="portfolio-img">
-                <img
-                  src="@/assets/images/portfolio/img1.jpg"
-                  class="img-fluid"
-                  alt="portfolio"
-                />
-              </div>
-              <v-card-text>
-                <h5 class="font-weight-medium font-18">
-                  Branding for Theme Designer
-                </h5>
-                <p class="font-14 mb-0">Digital Marketing</p>
-              </v-card-text>
-            </v-card> -->
-            <Content />
+            
           </v-col>
         </v-row>
 

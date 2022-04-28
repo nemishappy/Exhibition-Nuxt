@@ -5,7 +5,7 @@
       <v-card-text v-html="getDialog.message"></v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="green darken-1" text @click="$emit('stClick')">{{
+        <v-btn color="green darken-1" text @click.prevent="$emit('stClick')">{{
           getDialog.stAction
         }}</v-btn>
         <v-btn

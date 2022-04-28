@@ -14,8 +14,11 @@
 
       <div class="row">
         <div class="column justify-center align-center">
-          <div>
+          <div v-if="project.urlVideo">
             <video-player :src="project.urlVideo" />
+          </div>
+          <div v-else>
+            <img :src="project.urlImg" alt="" />
           </div>
         </div>
         <div class="column justify-center">
@@ -25,19 +28,26 @@
             </v-responsive>
             <ul>
               <v-btn
+                v-if="project.downloadUrlVideo"
                 class="action no-uppercase"
                 text
+                outlined
                 color="primary"
                 :href="project.downloadUrlVideo"
-                >ดาวน์โหลดคลิปวิดีโอ</v-btn
               >
+                <v-icon left> mdi-youtube </v-icon>
+                ดาวน์โหลดคลิปวิดีโอ
+              </v-btn>
               <v-btn
                 class="action no-uppercase"
                 text
+                outlined
                 color="primary"
                 @click.prevent="openDialog"
-                >ดาวน์โหลดเอกสาร</v-btn
               >
+                <v-icon left> mdi-file-document </v-icon>
+                ดาวน์โหลดเอกสาร
+              </v-btn>
             </ul>
           </div>
         </div>
@@ -120,27 +130,28 @@ export default {
         .getDownloadURL()
         .then((url) => {
           // `url` is the download URL for 'images/stars.jpg'
-          console.log(url)
+          console.log(url, this.project.title)
           // This can be downloaded directly:
+          const fileName = this.project.title
           var xhr = new XMLHttpRequest()
           xhr.responseType = 'blob'
-          xhr.onload = (event) => {
-            var blob = xhr.response
+          xhr.onload = function () {
+            const blob = xhr.response
+            const link = document.createElement('a')
+            link.href = URL.createObjectURL(blob)
+            link.download = fileName
+            link.click()
+            URL.revokeObjectURL(link.href)
           }
           xhr.open('GET', url)
           xhr.send()
+          // window.open(url)
         })
         .catch((error) => {
           // Handle any errors
           console.log(error)
         })
-      // var xhr = new XMLHttpRequest()
-      // xhr.responseType = 'blob'
-      // xhr.onload = (event) => {
-      //   var blob = xhr.response
-      // }
-      // xhr.open('GET', this.project.urlPDF)
-      // xhr.send()
+        this.hideDialog()
     },
   },
 }
@@ -161,6 +172,10 @@ export default {
     .v-player {
       max-height: 300px;
       width: 533.33px;
+    }
+    .img {
+      width: 533.33px;
+      height: auto;
     }
     .content {
       padding: 10px 0;
