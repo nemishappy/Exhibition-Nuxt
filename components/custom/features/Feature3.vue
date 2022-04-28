@@ -54,10 +54,10 @@
 </template>
 <script>
 export default {
-  name: "Feature3",
+  name: 'Feature3',
   data() {
-    return {};
+    return {}
   },
   methods: {},
-};
+}
 </script>
