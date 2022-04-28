@@ -33,6 +33,12 @@ export const getters = {
   getProjects(state) {
     return [...state.projects]
   },
+  getProjectsHP(state) {
+    return state.projects.filter((project) => project.type.tid === 1)
+  },
+  getProjectsDD(state) {
+    return state.projects.filter((project) => project.type.tid === 2)
+  },
   getProject(state) {
     return state.project
   },

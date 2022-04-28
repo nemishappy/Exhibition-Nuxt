@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="portfolio-component mini-spacer">
+    <div v-if="projectLoaded" class="portfolio-component mini-spacer">
       <v-container>
         <!-- -----------------------------------------------
             Start Portfolio Text
@@ -11,7 +11,11 @@
               <h2 class="section-title font-weight-medium">
                 ประเภทโรคติดต่อและภัยพิบัติ
               </h2>
+<<<<<<< HEAD
               <p>มีพื้นที่งานจัดแสดงทั้งหมด 0 พื้นที่</p>
+=======
+              <p>มีพื้นที่งานจัดแสดงทั้งหมด {{ projects.length }} พื้นที่</p>
+>>>>>>> a71c306 (add type)
             </div>
           </v-col>
         </v-row>
@@ -23,8 +27,14 @@
             Start Portfolio
         ----------------------------------------------- -->
         <v-row class="mt-13">
-          <v-col cols="12" md="6" lg="4">
-            
+          <v-col
+            cols="12"
+            md="6"
+            lg="4"
+            v-for="(project, index) in projects"
+            :key="index"
+          >
+            <Content :project="project" />
           </v-col>
         </v-row>
 
@@ -33,14 +43,32 @@
         ----------------------------------------------- -->
       </v-container>
     </div>
+    <div v-else>
+      <Overlay />
+    </div>
   </div>
 </template>
 
 <script>
+import Overlay from '~/components/Overlay'
 export default {
   components: {
+    Overlay,
     Content: () => import('@/components/Card'),
   },
+  computed: {
+    projectLoaded() {
+      return this.$store.getters.getProjectLoaded
+    },
+    projects() {
+      return this.$store.getters.getProjectsDD
+    },
+  },
+  async created(){
+    this.$store.dispatch('startOverlay')
+    await this.$store.dispatch('setAllProject')
+    console.log(this.projects)
+  }
 }
 </script>
 

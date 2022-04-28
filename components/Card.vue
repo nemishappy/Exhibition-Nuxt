@@ -19,7 +19,7 @@
     </div>
     <v-card-text>
       <h5 class="font-weight-medium font-18">
-        {{ project.type != null ? 'have-type' : 'no-type' }}
+        {{ project.type.name }}
       </h5>
       <p class="font-14 mb-0 text-truncate">{{ project.title }}</p>
     </v-card-text>
@@ -51,6 +51,8 @@ export default {
     max-height: 255px;
     .v-image__image--cover {
       transition: 0.1s ease-in;
+    }
+    .v-image{
       cursor: pointer;
     }
 
