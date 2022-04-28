@@ -9,9 +9,9 @@
           <v-col cols="12" sm="10" md="9" lg="7">
             <div class="text-center">
               <h2 class="section-title font-weight-medium">
-                สร้างเสริมสุขภาพ
+                ประเภทสร้างเสริมสุขภาพ
               </h2>
-              <p>รอข้อมูลเพิ่มเติม</p>
+              <p>มีพื้นที่งานจัดแสดงทั้งหมด 0 พื้นที่</p>
             </div>
           </v-col>
         </v-row>

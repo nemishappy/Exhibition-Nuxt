@@ -5,41 +5,29 @@
             Start Banner
         ----------------------------------------------- -->
       <v-row justify="center">
-        <v-col cols="12" md="7" lg="6" class="d-flex align-center">
+        <v-col class="d-flex align-center">
           <div class="text-center text-md-left">
             <h1 class="banner-title font-weight-bold white--text">
-              นิทรรศการมหาเถรสมาคม
+              นิทรรศการพระสร้างสุข
             </h1>
-            <h4 class="banner-subtitle white--text font-weight-regular">
-              รอข้อมูลเพิ่มเติม
-            </h4>
-            <div class="mt-16 pt-2">
-              <v-btn
-                color="error"
-                class="mr-0 mr-md-8 mb-5 mb-md-0 btn-custom-md"
-                nuxt
-                to="/start"
-                large
-                elevation="0"
-              >
-                ชมนิทรรศการ
-              </v-btn>
-              <!-- <v-btn
-                nuxt
-                large
-                to="/coming-soon"
-                class="btn-custom-md"
-                outlined
-                color="white"
-                elevation="0"
-              >
-                Upgrade to Pro
-              </v-btn> -->
+            <h6 class="banner-subtitle white--text font-weight-regular">
+              ในประเทศไทยมีประชาชนผู้นับถือศาสนาพุทธเป็นส่วนมากทำให้วัดวาอารามนั้นถือได้ว่าเป็นสถาบันหลักและเป็นที่พึ่งพาทางจิตใจมาอย่างช้านาน
+และเนื่องด้วยวัดที่เป็นสถาบันหลักของชุมชนมีการพัฒนาและขับเคลื่อนนโยบายสาธารณะแบบมีส่วนร่วมของพระสงฆ์ในระบบสุขภาพเพื่อสังคมสุขภาวะในระดับท้องถิ่นหรือพื้นที่ ซึ่งมีกิจกรรม”สุขภาพอนามัย” ในการที่จะสร้างสุขภาพอนามัยแก่พระสงฆ์และประชาชนทั่วไปนั้นจึงจัดได้ว่าเป็นกิจกรรมที่สำคัญอย่างยิ่งจึงเป็นที่มาของ เว็บไซต์นิทรรศการพระสร้างสุข ซึ่งจะจัดแสดงโครงงานที่เกี่ยวข้องกับการสร้างเสริมสุขภาพอนามัย ของแต่ละพื้นที่ภายใต้ 18 ภาคการปกครองคณะสงฆ์
+            </h6>
+            <div class="mt-8 pt-2">
+                  <v-btn
+                    color="error"
+                    class="btn-custom-lg linking btn-arrow "
+                    nuxt
+                    x-large
+                    to="/start"
+                    elevation="0"
+                  >
+                    <span calss="btn-subtitle">ชมนิทรรศการ</span>
+                    <i class="mdi mdi-arrow-right"></i>
+                  </v-btn>
             </div>
           </div>
-        </v-col>
-        <v-col cols="12" md="5" lg="6">
-          <v-img src="https://picsum.photos/id/11/500/300" alt="banner" />
         </v-col>
       </v-row>
 
@@ -65,7 +53,11 @@ export default {
 }
 
 .banner-subtitle {
-  font-size: 21px;
+  font-size: 20px;
+}
+
+.btn-subtitle {
+  font-size: 30px;
 }
 
 .banner-wrapper {

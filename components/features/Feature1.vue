@@ -9,13 +9,8 @@
           <v-col cols="12" md="10" lg="7">
             <div class="text-center">
               <h2 class="section-title font-weight-medium">
-                Awesome with Extra Ordinary Flexibility
+                โครงงานที่จัดแสดงเเบ่งออกเป็น 2 กลุ่มใหญ่ ดังนี้
               </h2>
-              <p>
-                You can relay on our amazing features list and also our customer
-                services will be great experience for you without doubt and in
-                no-time
-              </p>
             </div>
           </v-col>
         </v-row>
@@ -36,25 +31,25 @@
                       <v-row>
                         <v-col cols="12" md="4">
                           <img
-                            src="@/assets/images/features/2/img1.jpg"
-                            class="img-fluid rounded"
+                            src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/areas%2F6%2FcoverImg%2F6-1.png?alt=media&token=8866b75f-6938-4b09-9b48-1aedd9abdf98"
+                            class="img-resize rounded"
                             alt="feature2"
                           />
                         </v-col>
                         <v-col
                           cols="12"
                           md="8"
-                          class="px-md-0 d-flex align-center"
+                          class="px-md-14 d-flex align-center"
                         >
-                          <h4 class="font-weight-medium font-18">
-                            สร้างเสริมสุขภาพ
-                          </h4>
+                          <h3 class="font-weight-medium font-18">
+                            ประเภทสร้างเสริมสุขภาพ
+                          </h3>
                         </v-col>
                       </v-row>
                     </div>
                   </v-card-text>
                 </v-col>
-                <v-col cols="12" md="4" class="py-0">
+                <v-col cols="12" md="4" class="py-4">
                   <v-btn
                     block
                     depressed
@@ -78,25 +73,25 @@
                       <v-row>
                         <v-col cols="12" md="4">
                           <img
-                            src="@/assets/images/features/2/img2.jpg"
-                            class="img-fluid rounded"
+                            src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/areas%2F5%2FcoverImg%2F3..jpg?alt=media&token=6376a83c-aa15-4f84-94ca-04b60860cf2e"
+                            class="img-resize rounded"
                             alt="feature2"
                           />
                         </v-col>
                         <v-col
                           cols="12"
                           md="8"
-                          class="px-md-0 d-flex align-center"
+                          class="px-md-14 d-flex align-center"
                         >
-                          <h4 class="font-weight-medium font-18">
-                            โรคติดต่อและภัยพิบัติ
-                          </h4>
+                          <h3 class="font-weight-medium">
+                            ประเภทโรคติดต่อและภัยพิบัติ
+                          </h3>
                         </v-col>
                       </v-row>
                     </div>
                   </v-card-text>
                 </v-col>
-                <v-col cols="12" md="4" class="py-0">
+                <v-col cols="12" md="4" class="py-4">
                   <v-btn
                     block
                     depressed
@@ -195,6 +190,11 @@ export default {
   height: auto;
 }
 
+.img-resize {
+  max-height: 150px;
+  max-width: 150px;
+}
+
 //
 // Feature 3
 //
@@ -221,7 +221,6 @@ export default {
 .card-shadow {
   box-shadow: 0 0 30px rgb(115 128 157 / 10%) !important;
 }
-
 
 @media (min-width: 768px) and (max-width: 991px) {
   .feature3-card {

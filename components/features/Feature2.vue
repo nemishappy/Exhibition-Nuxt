@@ -21,24 +21,11 @@
                     Hilight
                   </v-chip>
                   <h3 class="feature3-title font-weight-medium">
-                    The New way of Making Your Website in mins
+                    ประวัติและที่มาของโครงการ
                   </h3>
                   <p>
-                    You can relay on our amazing features list and also our
-                    customer services will be great experience. You will love it
-                    for sure.
+                   หน่วยงานที่สนับสนุนโครงการมีดังนี้
                   </p>
-                  <v-btn
-                    color="error"
-                    class="btn-custom-lg linking mt-10 btn-arrow"
-                    nuxt
-                    large
-                    to="/"
-                    elevation="0"
-                  >
-                    <span>Explore More</span>
-                    <i class="mdi mdi-arrow-right"></i>
-                  </v-btn>
                 </div>
               </v-card-text>
             </v-card>

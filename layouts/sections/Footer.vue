@@ -30,8 +30,8 @@
           </p>
           <p>
             Site :
-            <a class="dark-link" href="https://www.wrappixel.com/"
-              >wrappixel.com</a
+            <a class="dark-link" href="https://phrasangsuk.com/"
+              >Phrasangsuk.com</a
             >
           </p>
         </v-col>
@@ -64,15 +64,10 @@
         <div class="d-block d-md-flex align-center">
           <p>
             All Rights Reserved by
-            <a href="https://www.wrappixel.com/" class="link">wrappixel.com</a>
+            <a class="dark-link" href="https://phrasangsuk.com/"
+              >Phrasangsuk.com</a
+            >
           </p>
-          <div class="ml-auto">
-            <div class="d-flex align-center">
-              <a href="/" class="link px-4">Terms of Use</a>
-              <a href="/" class="link px-4">Legal Disclaimer</a>
-              <a href="/" class="link px-4">Privacy Policy</a>
-            </div>
-          </div>
         </div>
       </div>
     </v-container>
@@ -97,13 +92,13 @@ export default {
   text-decoration: none;
   color: #3e4555 !important;
   &:hover {
-    color: #316ce8  !important;
+    color: #316ce8 !important;
   }
 }
 .link {
   text-decoration: none;
   &:hover {
-    color: #316ce8  !important;
+    color: #316ce8 !important;
   }
 }
 
