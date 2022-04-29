@@ -88,7 +88,7 @@ export const actions = {
     const dbResults = await dataBase.get()
     dbResults.forEach((doc) => {
       commit('ADD_PROJECT', doc.data())
-      console.log(doc.data())
+      // console.log(doc.data())
     })
 
     commit('SET_PROJECTLOADED', true)
@@ -113,23 +113,23 @@ export const actions = {
     if (getters.getProjects.length == 0) {
       await this.$fire.firestore
         .collection(`area${data.id}`)
+        .doc(data.pid)
         .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            if (doc.data().projectID == data.pid)
-              commit('SET_PROJECT', doc.data())
-            console.log(doc.id, ' => ', doc.data())
-          })
+        .then((doc) => {
+          commit('SET_PROJECT', doc.data())
+          // console.log('get from db =>',doc.data());
         })
         .catch((error) => {
           console.log('Error getting documents: ', error)
         })
+        
+        
     } else {
       var store = getters.getProjects.filter(
         (project) => project.projectID == data.pid
       )
-      console.log(store)
+      // console.log(store)
+      // console.log('get from store');
       commit('SET_PROJECT', store[0])
     }
 

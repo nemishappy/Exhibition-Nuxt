@@ -49,6 +49,7 @@
                 ดาวน์โหลดเอกสาร
               </v-btn>
             </ul>
+            <div class="my-2">ยอดเข้าชมโครงการนี้: {{ project.viewCount }}</div>
           </div>
         </div>
       </div>
@@ -83,27 +84,24 @@ export default {
     },
   },
   async created() {
-    this.routeID = this.$route.params.pid
-    // var store = this.$store.getters.getProjects.filter(
-    //   (project) => project.projectID == this.routeID
-    // )
+    this.routeID = this.$route.params.pid.toString()
     this.$store.dispatch('startOverlay')
-    this.$store.dispatch('loadProject', {
+    await this.$store.dispatch('loadProject', {
       id: this.$route.params.id,
       pid: this.routeID,
     })
-    // if (store.length == 0) {
-    //   await this.$store.dispatch('loadProject', {
-    //     id: this.$route.params.id,
-    //     pid: this.routeID,
-    //   })
-    //   var store = await this.$store.getters.getProjects.filter(
-    //     (project) => project.projectID == this.routeID
-    //   )
-    // }
-    // this.project = store[0]
+    this.addViewCount()
   },
   methods: {
+    async addViewCount() {
+      const increment = this.$fireModule.firestore.FieldValue.increment(1)
+      const dataBase = await this.$fire.firestore
+        .collection(`area${this.$route.params.id}`)
+        .doc(this.routeID)
+      dataBase.update({
+        viewCount: increment,
+      })
+    },
     openDialog() {
       this.$store.dispatch('setDialog', {
         isShow: true,
@@ -151,7 +149,7 @@ export default {
           // Handle any errors
           console.log(error)
         })
-        this.hideDialog()
+      this.hideDialog()
     },
   },
 }
