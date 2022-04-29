@@ -3,9 +3,8 @@
     ><div v-if="loadAreas" class="box">
       <!-- gets re-positioned in myInit(); -->
       <center>
-        <div class="mb-4">
-          <h2 class="mb-4">แผนที่แบ่งภาคการปกครองคณะสงฆ์</h2>
-          <p>รอข้อมูลเพิ่มเติม</p>
+        <div class="mb-4 mini ">
+          <h1 class="mb-4">แผนที่แบ่งภาคการปกครองคณะสงฆ์</h1>
         </div>
         <canvas id="myCanvas" ref="myCanvas"></canvas>
         <img

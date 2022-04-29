@@ -72,7 +72,7 @@ export default {
       valid: true,
       itemsType: [
         { name: 'สร้างเสริมสุขภาพ', tid: 1 },
-        { name: 'โรคติดต่อและภัยพิบัต', tid: 2 },
+        { name: 'โรคติดต่อและภัยพิบัติ', tid: 2 },
       ],
       namework: '',
       id: '',

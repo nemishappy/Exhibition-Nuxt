@@ -205,7 +205,7 @@ export default {
 
 .feature3-card {
   position: absolute;
-  top: 17%;
+  top: 80%;
   right: 0;
   .feature3-title {
     font-size: 24px;
