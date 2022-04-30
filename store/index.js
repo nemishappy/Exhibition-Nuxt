@@ -81,28 +81,33 @@ export const actions = {
   setDialog({ commit }, data) {
     commit('SET_DIALOG', data)
   },
-  async setProjectInArea({ commit }, data) {
+  async setProjectInArea({ commit, getters }, data) {
     commit('SET_PROJECTLOADED', false)
-    commit('CLEAR_PROJECTS')
-    const dataBase = this.$fire.firestore.collection(`area${data}`)
-    const dbResults = await dataBase.get()
-    dbResults.forEach((doc) => {
-      commit('ADD_PROJECT', doc.data())
-      // console.log(doc.data())
-    })
+    if (getters.getProjects.length < 11) {
+      commit('CLEAR_PROJECTS')
+      const dataBase = this.$fire.firestore.collection(`area${data}`)
+      const dbResults = await dataBase.get()
+      dbResults.forEach((doc) => {
+        commit('ADD_PROJECT', doc.data())
+      })
+    }
 
     commit('SET_PROJECTLOADED', true)
   },
   async setAllProject({ commit, getters }) {
     commit('SET_PROJECTLOADED', false)
-    if (getters.getProjects.length < 10) {
+    if (getters.getProjects.length < 11) {
       commit('CLEAR_PROJECTS')
       for (let index = 1; index < 19; index++) {
         const dataBase = this.$fire.firestore.collection(`area${index}`)
         const dbResults = await dataBase.get()
         dbResults.forEach((doc) => {
-          commit('ADD_PROJECT', doc.data())
-          // console.log(doc.data())
+          if (
+            !getters.getProjects.some((project) => project.projectID === doc.id)
+          ) {
+            commit('ADD_PROJECT', doc.data())
+            // console.log(doc.data())
+          }
         })
       }
     }
@@ -122,8 +127,6 @@ export const actions = {
         .catch((error) => {
           console.log('Error getting documents: ', error)
         })
-        
-        
     } else {
       var store = getters.getProjects.filter(
         (project) => project.projectID == data.pid

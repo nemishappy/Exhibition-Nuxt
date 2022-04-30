@@ -113,7 +113,7 @@ export default {
     this.$store.dispatch('startOverlay')
     await this.$store.dispatch('setProjectInArea', this.routeID)
     var projectOnDB = JSON.parse(
-      JSON.stringify(this.$store.getters.getProjects)
+      JSON.stringify(this.$store.getters.getProjects.filter((project) => project.areaID == this.routeID))
     )
 
     await projectOnDB.forEach((data) => {
