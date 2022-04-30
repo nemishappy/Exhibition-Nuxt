@@ -9,6 +9,9 @@
         </v-col>
       </v-row>
     </div>
+    <!-- -----------------------------------------------
+    ./ Start Form
+    ----------------------------------------------- -->
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model.number="areaID"
@@ -63,6 +66,9 @@
 
       <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
     </v-form>
+    <!-- -----------------------------------------------
+    ./ End Form
+    ----------------------------------------------- -->
   </v-container>
 </template>
 <script>
@@ -94,6 +100,7 @@ export default {
   methods: {
     async validate() {
       this.$refs.form.validate()
+      // validate all field
       if (this.pdfFile && this.coverImgFile) {
         this.$nuxt.$loading.start()
         console.log({
@@ -119,6 +126,7 @@ export default {
       this.$refs.form.reset()
     },
     async startUploadImg() {
+      // upload image to storage
       const storageRef = this.$fire.storage.ref()
       const imgRef = storageRef.child(
         `areas/${this.areaID}/coverImg/${this.coverImgFile.name}`
@@ -133,6 +141,7 @@ export default {
         },
         async () => {
           this.urlImg = await imgRef.getDownloadURL()
+          // then upload PDF to storage
           this.uploadPDF()
         }
       )
@@ -152,6 +161,7 @@ export default {
         },
         async () => {
           this.urlPDF = await pdfRef.getDownloadURL()
+          // then create doc
           this.createData()
         }
       )

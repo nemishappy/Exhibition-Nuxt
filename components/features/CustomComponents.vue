@@ -19,8 +19,6 @@ export default {
   components: {
     Feature1: () => import("@/components/features/Feature1"),
     Feature2: () => import("@/components/features/Feature2"),
-    Blog: () => import("@/components/features/Blog"),
- 
   },
 };
 </script>

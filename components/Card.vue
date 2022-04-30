@@ -3,7 +3,7 @@
     <div class="portfolio-img">
       <v-img
         v-if="!project.urlImg"
-        src="@/assets/images/portfolio/img1.jpg"
+        src="@/assets/images/card/img1.jpg"
         height="200"
         content-class="img-fluid img-cover"
         alt="project"

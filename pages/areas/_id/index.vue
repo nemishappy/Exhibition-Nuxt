@@ -1,6 +1,9 @@
 <template>
   <div>
     <v-container v-if="projectLoaded">
+      <!-- -----------------------------------------------
+            Start Area Title
+        ----------------------------------------------- -->
       <div class="mini-spacer-30">
         <v-row justify="center">
           <v-col cols="12" sm="10" md="9" lg="7">
@@ -13,9 +16,12 @@
           </v-col>
         </v-row>
       </div>
-      <!-- <div v-html="pin" class="svg-icon"></div> -->
+      <!-- -----------------------------------------------
+            End Area Title
+        ----------------------------------------------- -->
       <div class="main-box d-flex justify-center">
         <div class="img-box">
+          <!-- gets re-positioned in initPin(); -->
           <img
             :src="require(`~/assets/images/areas/1x/${routeID}.png`)"
             class="imgarea my-4"
@@ -88,7 +94,6 @@
 </template>
 
 <script>
-import pin from '~/assets/svg/pin.svg?raw'
 import Overlay from '~/components/Overlay'
 
 export default {
@@ -98,7 +103,6 @@ export default {
   data() {
     return {
       routeID: '',
-      pin,
       isLoaded: false,
       projects: [],
     }
@@ -112,28 +116,22 @@ export default {
     this.routeID = this.$route.params.id
     this.$store.dispatch('startOverlay')
     await this.$store.dispatch('setProjectInArea', this.routeID)
+    // copy projects from store
     var projectOnDB = JSON.parse(
-      JSON.stringify(this.$store.getters.getProjects.filter((project) => project.areaID == this.routeID))
+      JSON.stringify(
+        this.$store.getters.getProjects.filter(
+          (project) => project.areaID == this.routeID
+        )
+      )
     )
-
+    // add 'isActive' property for template section 
     await projectOnDB.forEach((data) => {
       var obj = data
       obj['isActive'] = false
       this.projects.push(obj)
     })
   },
-  mounted() {
-    // this.$nextTick(() => {
-    //   this.initPin()
-    // })
-    // this.$nextTick(() => {
-    //   this.$store.dispatch('startOverlay')
-    //   setTimeout(() => {
-    //     this.$store.dispatch('finishOverlay')
-    //   }, 3000)
-    // })
-  },
-  
+
   methods: {
     async initPin() {
       this.$nuxt.$loading.start()
@@ -146,7 +144,6 @@ export default {
       this.$nuxt.$loading.finish()
     },
     toEvent(index) {
-      // this.projects[index].isActive = false
       this.$router.push({
         name: 'areas-id-project-pid',
         params: { id: this.routeID, pid: this.projects[index].projectID },

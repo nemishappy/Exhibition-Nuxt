@@ -2,6 +2,9 @@
   <div v-if="projectLoaded" class="box">
     <v-container>
       <div class="mini-spacer-30">
+        <!-- -----------------------------------------------
+            Start Project Title
+        ----------------------------------------------- -->
         <v-row justify="center">
           <v-col cols="12" sm="10" md="9" lg="7">
             <div class="text-center">
@@ -9,19 +12,33 @@
             </div>
           </v-col>
         </v-row>
+        <!-- -----------------------------------------------
+            End Project Title
+        ----------------------------------------------- -->
       </div>
       <Dialog @stClick="downloadPDF" @ndClick="hideDialog" />
-
+      <!-- -----------------------------------------------
+            Start Project Content
+      ----------------------------------------------- -->
       <div class="row">
         <div class="column justify-center align-center">
+          <!-- -----------------------------------------------
+            Left column
+          ----------------------------------------------- -->
           <div v-if="project.urlVideo">
             <video-player :src="project.urlVideo" />
           </div>
           <div v-else>
+            <!-- -----------------------------------------------
+              you can edit img element to be multiple image here
+            ----------------------------------------------- -->
             <img :src="project.urlImg" alt="" />
           </div>
         </div>
         <div class="column justify-center">
+          <!-- -----------------------------------------------
+            Right column
+          ----------------------------------------------- -->
           <div class="d-flex flex-column">
             <v-responsive class="content overflow-y-auto" max-height="400px">
               <p>{{ project.content }}</p>
@@ -53,6 +70,9 @@
           </div>
         </div>
       </div>
+      <!-- -----------------------------------------------
+            End Project Content
+      ----------------------------------------------- -->
     </v-container>
   </div>
   <div v-else><Overlay /></div>
@@ -84,6 +104,7 @@ export default {
     },
   },
   async created() {
+    // on created we fetch data needed
     this.routeID = this.$route.params.pid.toString()
     this.$store.dispatch('startOverlay')
     await this.$store.dispatch('loadProject', {

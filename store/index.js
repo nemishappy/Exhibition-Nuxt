@@ -33,12 +33,6 @@ export const getters = {
   getProjects(state) {
     return [...state.projects]
   },
-  getProjectsHP(state) {
-    return state.projects.filter((project) => project.type.tid === 1)
-  },
-  getProjectsDD(state) {
-    return state.projects.filter((project) => project.type.tid === 2)
-  },
   getProject(state) {
     return state.project
   },
@@ -83,6 +77,7 @@ export const actions = {
   },
   async setProjectInArea({ commit, getters }, data) {
     commit('SET_PROJECTLOADED', false)
+    // load project in area
     if (getters.getProjects.length < 11) {
       commit('CLEAR_PROJECTS')
       const dataBase = this.$fire.firestore.collection(`area${data}`)
@@ -96,18 +91,15 @@ export const actions = {
   },
   async setAllProject({ commit, getters }) {
     commit('SET_PROJECTLOADED', false)
+    // load all project
     if (getters.getProjects.length < 11) {
       commit('CLEAR_PROJECTS')
       for (let index = 1; index < 19; index++) {
         const dataBase = this.$fire.firestore.collection(`area${index}`)
         const dbResults = await dataBase.get()
         dbResults.forEach((doc) => {
-          if (
-            !getters.getProjects.some((project) => project.projectID === doc.id)
-          ) {
-            commit('ADD_PROJECT', doc.data())
-            // console.log(doc.data())
-          }
+          
+          commit('ADD_PROJECT', doc.data())
         })
       }
     }
@@ -115,24 +107,24 @@ export const actions = {
   },
   async loadProject({ commit, getters }, data) {
     commit('SET_PROJECTLOADED', false)
+    // load specific project
     if (getters.getProjects.length == 0) {
+      // no data in store => fetch from db
       await this.$fire.firestore
         .collection(`area${data.id}`)
         .doc(data.pid)
         .get()
         .then((doc) => {
           commit('SET_PROJECT', doc.data())
-          // console.log('get from db =>',doc.data());
         })
         .catch((error) => {
           console.log('Error getting documents: ', error)
         })
     } else {
+      // have data in store => qurry data from store
       var store = getters.getProjects.filter(
         (project) => project.projectID == data.pid
       )
-      // console.log(store)
-      // console.log('get from store');
       commit('SET_PROJECT', store[0])
     }
 

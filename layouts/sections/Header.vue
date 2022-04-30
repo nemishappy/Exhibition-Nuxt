@@ -9,7 +9,7 @@
         <img
           class="mr-3 start"
           @click="toHome"
-          src="~/assets/images/logo.png"
+          src="~/assets/images/logo.jpg"
           height="40"
         />
         <v-toolbar-title class="start" v-text="title" @click="toHome" />

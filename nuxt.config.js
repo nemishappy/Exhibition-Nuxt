@@ -25,6 +25,7 @@ module.exports = {
       },
     ],
   },
+  pwa: { icon: { source: '~/static/favicon.ico' } },
 
   loading: {
     color: 'DodgerBlue',
@@ -72,6 +73,8 @@ module.exports = {
       },
     ],
   ],
+
+
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

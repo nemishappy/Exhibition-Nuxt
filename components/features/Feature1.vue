@@ -190,10 +190,7 @@ export default {
   height: auto;
 }
 
-.img-resize {
-  max-height: 150px;
-  max-width: 150px;
-}
+
 
 //
 // Feature 3

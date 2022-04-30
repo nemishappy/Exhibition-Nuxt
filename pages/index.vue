@@ -1,6 +1,12 @@
 <template>
   <div>
+    <!-- -----------------------------------------------
+    ./ Banner seciotn
+    ----------------------------------------------- -->
     <Banner />
+    <!-- -----------------------------------------------
+    ./ Custom feature seciotn
+    ----------------------------------------------- -->
     <Feature/>
   </div>
 </template>
@@ -16,18 +22,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.bg {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('~/assets/images/background/startpage.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-color: #999;
-}
+
 .container {
   padding: 60px;
   height: 100%;

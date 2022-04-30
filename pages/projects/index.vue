@@ -3,7 +3,7 @@
     <div v-if="projectLoaded" class="portfolio-component mini-spacer">
       <v-container>
         <!-- -----------------------------------------------
-            Start Portfolio Text
+            Start Project Text
         ----------------------------------------------- -->
         <v-row justify="center">
           <v-col cols="12" sm="10" md="9" lg="7">
@@ -17,12 +17,13 @@
         </v-row>
 
         <!-- -----------------------------------------------
-            End Portfolio Text
+            End Project Text
         ----------------------------------------------- -->
         <!-- -----------------------------------------------
-            Start Portfolio
+            Start Project
         ----------------------------------------------- -->
         <v-row class="mt-13">
+          <!-- loop all projects -->
           <v-col
             cols="12"
             md="6"
@@ -35,7 +36,7 @@
         </v-row>
 
         <!-- -----------------------------------------------
-            End Portfolio
+            End Project
         ----------------------------------------------- -->
       </v-container>
     </div>
@@ -63,7 +64,6 @@ export default {
   async created() {
     this.$store.dispatch('startOverlay')
     await this.$store.dispatch('setAllProject')
-    console.log(this.projects.length)
   },
 }
 </script>

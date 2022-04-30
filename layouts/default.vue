@@ -9,45 +9,13 @@
 </template>
 
 <script>
-// import Header from '~/layouts/sections/Header'
 export default {
   name: 'DefaultLayout',
   components: {
     Header: () => import('@/layouts/sections/Header'),
     Footer: () => import('@/layouts/sections/Footer'),
   },
-  created() {
-    this.checkRoute()
-  },
-  data() {
-    return {
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'นิทรรศการมหาเถรสมาคม',
-      isStartPage: false,
-    }
-  },
-  watch: {
-    $route() {
-      this.checkRoute()
-    },
-  },
-  methods: {
-    checkRoute() {
-      if (this.$route.name == 'index') {
-        this.isStartPage = true
-        return
-      }
-      this.isStartPage = false
-    },
-    back() {
-      this.$router.go(-1)
-    },
-    toHome() {
-      this.$router.push({ name: 'start' })
-    },
-  },
+  methods: {},
 }
 </script>
 
@@ -80,5 +48,10 @@ export default {
 
 .mini-spacer-30 {
   padding: 50px 0;
+}
+
+.img-resize {
+  max-height: 150px;
+  max-width: 150px;
 }
 </style>

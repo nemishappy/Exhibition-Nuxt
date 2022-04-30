@@ -3,23 +3,24 @@
     ><div v-if="loadAreas" class="box">
       <!-- gets re-positioned in myInit(); -->
       <center>
-        <div class="mb-4 mini ">
-          <h1 class="mb-4">แผนที่แบ่งภาคการปกครองคณะสงฆ์</h1>
+        <div class="mb-4 mini">
+          <h1 class="mb-4">แผนที่นิทรรศการออนไลน์แบ่งตามภาคคณะสงฆ์</h1>
         </div>
         <canvas id="myCanvas" ref="myCanvas"></canvas>
         <img
           src="~/assets/images/Thailand_Map.png"
-          usemap="#imgmap_css_container_imgmap201293016112"
+          usemap="#imgmap_css_container_imgmap"
           class="imgmap_css_container"
-          alt="imgmap201293016112"
-          id="img-imgmap201293016112"
-          ref="img-imgmap201293016112"
+          alt="imgmap"
+          id="img-imgmap"
+          ref="img-imgmap"
           width="701"
           height="1280"
           @load="myInit"
         />
 
-        <map name="imgmap_css_container_imgmap201293016112">
+        <map name="imgmap_css_container_imgmap">
+          <!-- loop 18 areas in v-for -->
           <nuxt-link
             v-for="(area, index) in areas"
             :key="index"
@@ -28,7 +29,6 @@
             <area
               @mouseover="drawArea(index)"
               @mouseout="myLeave()"
-              alt="imgmap201293016112-0"
               :title="area.title"
               :coords="area.coords"
               shape="poly"
@@ -56,6 +56,7 @@ export default {
   },
   data() {
     return {
+      // data areas of map no need to fetch data from db for performance
       areas: [
         {
           areaId: 1,
@@ -225,6 +226,7 @@ export default {
     }
   },
   async mounted() {
+    // on mounted : DOM is rendered load all assets and re-positioned
     for (let index = 0; index < 18; index++) {
       imgArray[index] = new Image()
       imgArray[index].src = await require('~/assets/images/areas/scale/' +
@@ -239,11 +241,6 @@ export default {
         this.loadAreas = true
       }, 500)
     })
-  },
-  computed: {
-    // areas() {
-    //   return this.$store.getters.getAreas
-    // },
   },
   methods: {
     byRefs(e) {
@@ -263,6 +260,7 @@ export default {
       }
     },
     myLeave() {
+      // delay and clear canvas
       this.timer = setTimeout(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         img.style.opacity = 1.0
@@ -270,7 +268,7 @@ export default {
     },
     async myInit() {
       // get the target image
-      img = await this.byRefs('img-imgmap201293016112')
+      img = await this.byRefs('img-imgmap')
 
       var x, y, w, h
 
@@ -313,9 +311,6 @@ export default {
 </script>
 
 <style scoped>
-/* div {
-  background-color: gray;
-} */
 .box {
   height: 100%;
 }
@@ -324,15 +319,4 @@ canvas {
   position: absolute;
 }
 
-@keyframes leaves {
-  0% {
-    transform: scale(1);
-    -webkit-transform: scale(1);
-  }
-
-  100% {
-    transform: scale(2);
-    -webkit-transform: scale(2);
-  }
-}
 </style>
