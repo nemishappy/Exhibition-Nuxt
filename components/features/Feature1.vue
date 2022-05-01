@@ -31,7 +31,7 @@
                       <v-row>
                         <v-col cols="12" md="4">
                           <img
-                            src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/areas%2F6%2FcoverImg%2F6-1.png?alt=media&token=8866b75f-6938-4b09-9b48-1aedd9abdf98"
+                            src="~/assets/images/health.jpg"
                             class="img-resize rounded"
                             alt="feature2"
                           />
@@ -73,7 +73,7 @@
                       <v-row>
                         <v-col cols="12" md="4">
                           <img
-                            src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/areas%2F5%2FcoverImg%2F3..jpg?alt=media&token=6376a83c-aa15-4f84-94ca-04b60860cf2e"
+                            src="~/assets/images/dd.jpg"
                             class="img-resize rounded"
                             alt="feature2"
                           />
