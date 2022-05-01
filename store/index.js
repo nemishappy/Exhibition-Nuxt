@@ -21,6 +21,7 @@ export const state = () => ({
     x: 0, // position on left of image
     y: 0, // position on top of image
   },
+  user: {uid: ''},
 })
 
 export const getters = {
@@ -38,6 +39,9 @@ export const getters = {
   },
   getProjectLoaded(state) {
     return state.projectLoaded
+  },
+  getUser(state) {
+    return state.user
   },
 }
 
@@ -62,6 +66,9 @@ export const mutations = {
   },
   SET_PROJECT(state, payload) {
     state.project = { ...state.project, ...payload }
+  },
+  SET_USER(state, payload) {
+    state.user = payload
   },
 }
 
@@ -98,7 +105,6 @@ export const actions = {
         const dataBase = this.$fire.firestore.collection(`area${index}`)
         const dbResults = await dataBase.get()
         dbResults.forEach((doc) => {
-          
           commit('ADD_PROJECT', doc.data())
         })
       }
@@ -129,5 +135,8 @@ export const actions = {
     }
 
     commit('SET_PROJECTLOADED', true)
+  },
+  setUid({ commit }, data) {
+    commit('SET_USER', data)
   },
 }
