@@ -12,6 +12,12 @@
                 ประเภทโรคติดต่อและภัยพิบัติ
               </h2>
               <p>มีพื้นที่งานจัดแสดงทั้งหมด {{ projects.length }} พื้นที่</p>
+              <v-text-field
+                v-model="searchTerm"
+                label="ค้นหาโครงการ"
+                prepend-icon="mdi-magnify"
+                @input="searchProjects"
+              ></v-text-field>
             </div>
           </v-col>
         </v-row>
@@ -53,18 +59,37 @@ export default {
     Overlay,
     Content: () => import('@/components/Card'),
   },
+  data() {
+    return {
+      searchTerm: '',
+      projects: [],
+    }
+  },
   computed: {
     projectLoaded() {
       return this.$store.getters.getProjectLoaded
     },
-    projects() {
-      return this.$store.getters.getProjects.filter((project) => project.type.tid === 2)
+    projectsInStore() {
+      return this.$store.getters.getProjects.filter(
+        (project) => project.type.tid === 2
+      )
     },
   },
-  async created(){
+  async created() {
     this.$store.dispatch('startOverlay')
     await this.$store.dispatch('setAllProject')
-  }
+    this.projects = this.projectsInStore
+  },
+  methods: {
+    searchProjects() {
+      this.projects = this.projectsInStore.filter((project) => {
+        return (
+          project.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) >
+          -1
+        )
+      })
+    },
+  },
 }
 </script>
 

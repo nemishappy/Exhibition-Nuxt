@@ -13,6 +13,12 @@
               </h2>
               <p>มีพื้นที่งานจัดแสดงทั้งหมด {{ projects.length }} พื้นที่</p>
             </div>
+            <v-text-field
+              v-model="searchTerm"
+              label="ค้นหาโครงการ"
+              prepend-icon="mdi-magnify"
+              @input="searchProjects"
+            ></v-text-field>
           </v-col>
         </v-row>
 
@@ -53,17 +59,31 @@ export default {
     Overlay,
     Content: () => import('@/components/Card'),
   },
+  data() {
+    return {
+      searchTerm: '',
+      projects: [],
+    }
+  },
   computed: {
     projectLoaded() {
       return this.$store.getters.getProjectLoaded
-    },
-    projects() {
-      return this.$store.getters.getProjects
     },
   },
   async created() {
     this.$store.dispatch('startOverlay')
     await this.$store.dispatch('setAllProject')
+    this.projects = this.$store.getters.getProjects
+  },
+  methods: {
+    searchProjects() {
+      this.projects = this.$store.getters.getProjects.filter((project) => {
+        return (
+          project.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) >
+          -1
+        )
+      })
+    },
   },
 }
 </script>
