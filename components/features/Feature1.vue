@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="feature2-component mini-spacer bg-extra-light">
+    <div class="feature2-component mini bg-extra-light">
       <v-container>
         <!-- -----------------------------------------------
             Start Feature 2 Text
@@ -9,8 +9,9 @@
           <v-col cols="12" md="10" lg="7">
             <div class="text-center">
               <h2 class="section-title font-weight-medium">
-                โครงงานที่จัดแสดงเเบ่งออกเป็น 2 กลุ่มใหญ่ ดังนี้
+                ห้องนิทรรศการ
               </h2>
+              <v-divider></v-divider>
             </div>
           </v-col>
         </v-row>
@@ -31,7 +32,7 @@
                       <v-row>
                         <v-col cols="12" md="4">
                           <img
-                            src="~/assets/images/health.jpg"
+                            src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/asset%2Fcover%2Fhealth.png?alt=media&token=0831e4f8-291f-43b7-8540-e9cc6ba714c2"
                             class="img-resize rounded"
                             alt="feature2"
                           />
@@ -73,7 +74,7 @@
                       <v-row>
                         <v-col cols="12" md="4">
                           <img
-                            src="~/assets/images/dd.jpg"
+                            src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/asset%2Fcover%2Fcovid.png?alt=media&token=617789ad-45b8-4e07-a249-7ef8df7f8cfa"
                             class="img-resize rounded"
                             alt="feature2"
                           />

@@ -4,7 +4,8 @@
       <!-- gets re-positioned in myInit(); -->
       <center>
         <div class="mb-4 mini">
-          <h1 class="mb-4">แผนที่นิทรรศการออนไลน์แบ่งตามภาคคณะสงฆ์</h1>
+          <h1 class="mb-4">แผนที่นิทรรศการออนไลน์แบ่งตามภาคการปกครองคณะสงฆ์</h1>
+          <v-divider></v-divider>
         </div>
         <canvas id="myCanvas" ref="myCanvas"></canvas>
         <img

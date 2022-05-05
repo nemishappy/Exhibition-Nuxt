@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     toProject() {
-      console.log('click', this.project.areaID, this.project.projectID)
+      // console.log('click', this.project.areaID, this.project.projectID)
       this.$router.push({
         name: 'areas-id-project-pid',
         params: { id: this.project.areaID, pid: this.project.projectID},

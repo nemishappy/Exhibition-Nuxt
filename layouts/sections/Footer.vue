@@ -36,6 +36,42 @@
                 height="46"
                 alt="feature2"
               />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/asset%2Flogo%2F%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%B8%E0%B8%97%E0%B8%98-removebg-preview-removebg-preview.png?alt=media&token=d7848a66-0c84-4650-b3c7-0b4ca4d53c4c"
+                class="img-resize rounded"
+                height="46"
+                alt="feature2"
+              />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/asset%2Flogo%2FmessageImage_1651622785461-removebg-preview.png?alt=media&token=ec858284-4681-4c19-85dc-875edbcc74bc"
+                class="img-resize rounded"
+                height="46"
+                alt="feature2"
+              />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/asset%2Flogo%2F%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B8%97%E0%B8%A3%E0%B8%A7%E0%B8%87%E0%B8%AA%E0%B8%B2%E0%B8%98%E0%B8%B2%E0%B8%A3%E0%B8%93%E0%B8%AA%E0%B8%B8%E0%B8%82-removebg-preview.png?alt=media&token=10625e64-0f5d-4588-9410-fca9104214e3"
+                class="img-resize rounded"
+                height="46"
+                alt="feature2"
+              />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/asset%2Flogo%2F%E0%B8%A1%E0%B8%A1%E0%B8%A3-removebg-preview.png?alt=media&token=2853152e-7a89-454f-b948-41fd286caade"
+                class="img-resize rounded"
+                height="46"
+                alt="feature2"
+              />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/asset%2Flogo%2F%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B9%80%E0%B8%96%E0%B8%A3%E0%B8%AA%E0%B8%A1%E0%B8%B2%E0%B8%84%E0%B8%A1-removebg-preview.png?alt=media&token=f65d7f7c-cbd8-4367-b715-b07b653fb42c"
+                class="img-resize rounded"
+                height="46"
+                alt="feature2"
+              />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/asset%2Flogo%2Fc7mdsl-removebg-preview.png?alt=media&token=5b12dc31-b32a-4a13-bb1a-51b503ef0332"
+                class="img-resize rounded"
+                height="46"
+                alt="feature2"
+              />
             </div>
           </div>
         </v-col>
@@ -44,14 +80,17 @@
       ----------------------------------------------- -->
         <v-col cols="12" sm="12" md="12" lg="3" class="px-xs-0">
           <h4 class="font-weight-regular font-18">Address</h4>
-          <p class="mt-10">รอข้อมูลเพิ่มเติม</p>
+          <p class="mt-2">
+            กองกิจการนิสิต สำนักงานอธิการบดี อาคารเรียนรวม ชั้น 3 โซน A ห้อง
+            A300 มหาวิทยาลัยมหาจุฬาลงกรณราชวิทยาลัย วังน้อย อยุธยา 13170
+          </p>
         </v-col>
         <!-- -----------------------------------------------
         Third Column
       ----------------------------------------------- -->
         <v-col cols="12" sm="12" md="12" lg="3" class="px-xs-0">
           <h4 class="font-weight-regular font-18">Phone</h4>
-          <p class="mt-10 mb-0">Reception : รอข้อมูลเพิ่มเติม</p>
+          <p class="mt-2 mb-0">Reception : รอข้อมูลเพิ่มเติม</p>
           <p>Office : รอข้อมูลเพิ่มเติม</p>
         </v-col>
         <!-- -----------------------------------------------
@@ -60,21 +99,12 @@
         <v-col cols="12" sm="12" md="12" lg="3" class="px-xs-0">
           <h4 class="font-weight-regular font-18">Social</h4>
 
-          <div class="social-icons mt-10">
-            <a href="#">
+          <div class="social-icons mt-2">
+            <a href="http://www.facebook.com/ศาสนบุคคลกับการสร้างสังคมสุขภาวะ">
               <i class="mdi mdi-facebook"></i>
             </a>
-            <a href="#">
+            <a href="http://www.stud.mcu.ac.th/shi/">
               <i class="mdi mdi-twitter"></i>
-            </a>
-            <a href="#">
-              <i class="mdi mdi-google-plus"></i>
-            </a>
-            <a href="#">
-              <i class="mdi mdi-youtube"></i>
-            </a>
-            <a href="#">
-              <i class="mdi mdi-instagram"></i>
             </a>
           </div>
         </v-col>
@@ -83,8 +113,8 @@
         <div class="d-block d-md-flex align-center">
           <p>
             All Rights Reserved by
-            <a class="dark-link" href="https://phrasangsuk.com/"
-              >Phrasangsuk.com</a
+            <a class="dark-link" href="http://www.stud.mcu.ac.th/shi/"
+              >stud.mcu.ac.th</a
             >
           </p>
         </div>

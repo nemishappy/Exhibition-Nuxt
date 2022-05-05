@@ -4,11 +4,14 @@
       <v-container class="position-relative">
         <v-row justify="center">
           <v-col cols="12" md="1" lg="7" class="text-center">
-            <v-chip small color="error" text-color="white"> Hilight </v-chip>
             <div class="text-center">
-              <h2 class="section-title font-weight-medium">
-                ประวัติและที่มาของโครงการ
+              <h2
+                class="section-title font-weight-medium error white--text"
+                elevation="4"
+              >
+                ความเป็นมาและความสำคัญของโครงการ
               </h2>
+              <v-divider></v-divider>
             </div>
           </v-col>
         </v-row>

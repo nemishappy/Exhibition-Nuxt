@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="projectLoaded" class="portfolio-component mini-spacer">
+    <div v-if="projectLoaded" class="portfolio-component mini">
       <v-container>
         <!-- -----------------------------------------------
             Start Project Title
