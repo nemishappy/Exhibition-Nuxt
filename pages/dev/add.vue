@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="user.uid">
     <div class="mini-spacer-30">
       <v-row justify="center">
         <v-col cols="12" sm="10" md="9" lg="7">
@@ -17,17 +17,18 @@
         v-model.number="areaID"
         label="AreaID"
         required
+        :rules="numberRules"
       ></v-text-field>
       <v-text-field
         v-model.number="projectID"
         label="ProjectID"
         required
+        :rules="numberRules"
       ></v-text-field>
       <v-text-field v-model="title" label="title" required></v-text-field>
       <v-text-field v-model="content" label="content" required></v-text-field>
       <v-select
         v-model="type"
-        :hint="`${type.name}, ${type.tid}`"
         :items="itemsType"
         item-text="name"
         item-value="tid"
@@ -70,13 +71,20 @@
     ./ End Form
     ----------------------------------------------- -->
   </v-container>
+  <div v-else></div>
 </template>
 <script>
 export default {
   data() {
     return {
       valid: true,
+      numberRules: [
+        (v) => v || 'This field may not be empty',
+        (v) => Number.isInteger(v) || 'The value must be an integer number',
+        (v) => v > 0 || 'The value must be greater than zero',
+      ],
       itemsType: [
+        { name: 'ไม่มีหมวดหมู่', tid: 0 },
         { name: 'สร้างเสริมสุขภาพ', tid: 1 },
         { name: 'โรคติดต่อและภัยพิบัติ', tid: 2 },
       ],
@@ -86,7 +94,7 @@ export default {
       projectID: '',
       title: '',
       content: '',
-      type: { name: '', tid: 0 },
+      type: { name: 'ไม่มีหมวดหมู่', tid: 0 },
       coverImgFile: null,
       urlImg: '',
       urlVideo: '',
@@ -108,14 +116,20 @@ export default {
     }
   },
   destroyed() {
-    this.logout()
+    // uncommant "this.logout()" for more security
+    // this.logout()
   },
   methods: {
     async validate() {
       this.$refs.form.validate()
       // validate all field
-      if (this.pdfFile && this.coverImgFile) {
+      if (this.coverImgFile) {
         this.$nuxt.$loading.start()
+        const files = []
+        files.push(this.coverImgFile)
+        if (this.pdfFile) {
+          files.push(this.pdfFile)
+        }
         console.log({
           areaID: this.areaID,
           projectID: this.projectID,
@@ -129,9 +143,27 @@ export default {
           x: this.x,
           y: this.y,
           viewCount: 0,
+          files: files,
         })
-        this.startUploadImg()
-
+        // await this.uploadImg()
+        // if (this.pdfFile) {
+        //   await this.uploadPDF()
+        // }
+        // await this.createData()
+        Promise.all(
+          // Array of "Promises"
+          files.map((file) => this.uploadFile(file))
+        )
+          .then((url) => {
+            console.log(`All success`)
+            console.log(this.urlImg);
+            console.log(this.urlPDF);
+          })
+          .catch((error) => {
+            console.log(`Some failed: `, error.message)
+          })
+        this.$nuxt.$loading.finish()
+        this.$refs.form.reset()
         return
       }
     },
@@ -144,13 +176,43 @@ export default {
         uid: '',
       })
     },
-    async startUploadImg() {
+    async uploadFile(file) {
+      // upload file to storage
+      const storageRef = this.$fire.storage.ref()
+      var type
+      if (file.type == 'application/pdf') {
+        type = 'doc'
+      } else {
+        type = 'coverImg'
+      }
+      const fileRef = storageRef.child(
+        `areas/${this.areaID}/${type}/${file.name}`
+      )
+      await fileRef.put(file).on(
+        'state_changed',
+        (snapshot) => {
+          console.log(snapshot)
+        },
+        (err) => {
+          console.log(err)
+        },
+        async () => {
+          if (file.type == 'application/pdf') {
+            this.urlPDF = await fileRef.getDownloadURL()
+          } else {
+            this.urlImg = await fileRef.getDownloadURL()
+          }
+          console.log('One success:', file.name)
+        }
+      )
+    },
+    async uploadImg() {
       // upload image to storage
       const storageRef = this.$fire.storage.ref()
       const imgRef = storageRef.child(
         `areas/${this.areaID}/coverImg/${this.coverImgFile.name}`
       )
-      imgRef.put(this.coverImgFile).on(
+      await imgRef.put(this.coverImgFile).on(
         'state_changed',
         (snapshot) => {
           console.log(snapshot)
@@ -160,8 +222,6 @@ export default {
         },
         async () => {
           this.urlImg = await imgRef.getDownloadURL()
-          // then upload PDF to storage
-          this.uploadPDF()
         }
       )
     },
@@ -170,7 +230,7 @@ export default {
       const pdfRef = storageRef.child(
         `areas/${this.areaID}/doc/${this.pdfFile.name}`
       )
-      pdfRef.put(this.pdfFile).on(
+      await pdfRef.put(this.pdfFile).on(
         'state_achanged',
         (snapshot) => {
           console.log(snapshot)
@@ -180,8 +240,6 @@ export default {
         },
         async () => {
           this.urlPDF = await pdfRef.getDownloadURL()
-          // then create doc
-          this.createData()
         }
       )
     },
@@ -205,8 +263,6 @@ export default {
         viewCount: 0,
       })
       console.log('done.')
-      this.$nuxt.$loading.finish()
-      this.$refs.form.reset()
     },
   },
 }

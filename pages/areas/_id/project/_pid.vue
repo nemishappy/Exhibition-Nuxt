@@ -30,7 +30,7 @@
           </div>
           <div v-else>
             <!-- -----------------------------------------------
-              you can edit img element to be multiple image here
+              img element can be multiple image here
             ----------------------------------------------- -->
             <img :src="project.urlImg" alt="" />
           </div>
@@ -191,10 +191,23 @@ export default {
     .v-player {
       max-height: 300px;
       width: 533.33px;
+      @media (max-width: 600px) {
+        max-width: 320px;
+      }
     }
     .img {
       width: 533.33px;
       height: auto;
+      @media (max-width: 600px) {
+        max-width: 400px;
+      }
+    }
+    ul {
+      @media (max-width: 600px) {
+        padding-left: 0px;
+        display: flex;
+        flex-direction: column;
+      }
     }
     .content {
       padding: 10px 0;

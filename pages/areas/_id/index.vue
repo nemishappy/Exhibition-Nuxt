@@ -19,16 +19,16 @@
       <!-- -----------------------------------------------
             End Area Title
         ----------------------------------------------- -->
-      <div class="main-box d-flex justify-center">
+      <div class="main-box d-flex justify-center my-4">
         <div class="img-box">
           <!-- gets re-positioned in initPin(); -->
           <img
             :src="require(`~/assets/images/areas/1x/${routeID}.png`)"
-            class="imgarea my-4"
+            class="imgarea "
             ref="imgarea"
             @load="initPin()"
           />
-          <div class="all-pin">
+          <div class="all-pin ">
             <v-menu
               v-model="project.isActive"
               content-class="my-menu"
@@ -160,8 +160,8 @@ export default {
   color: red;
 }
 .main-box {
-  height: 500px;
-  margin: 12px 0;
+  height: fit-content;
+  width: 100%;
   .img-box {
     height: 500px;
     width: fit-content;

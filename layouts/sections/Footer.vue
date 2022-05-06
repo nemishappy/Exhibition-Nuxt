@@ -4,11 +4,11 @@
   ----------------------------------------------- -->
   <v-footer class="footer">
     <v-container>
-      <v-row class="py-0 py-md-12">
+      <v-row class="py-0 py-md-12" justify="center">
         <!-- -----------------------------------------------
         First Column
       ----------------------------------------------- -->
-        <v-col cols="12" sm="12" md="12" lg="3" class="px-lg-0">
+        <v-col cols="12" sm="12" md="12" lg="3" class="px-lg-0 mx-auto">
           <div>
             <h4 class="font-weight-regular font-18">สนับสนุนโดย</h4>
             <img
@@ -28,8 +28,8 @@
             />
           </div>
           <div class="mt-2">
-            <h4 class="font-weight-regular font-18">ร่วมกับ</h4>
-            <div class="d-flex ml-md-1">
+            <h4 class="font-weight-regular font-18">ร่วมกับ ภาคีเครือข่าย</h4>
+            <div class="d-flex flex-warp">
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/exhibition-thaihealth.appspot.com/o/logo3.png?alt=media&token=80ba7874-6b17-496c-9920-4c880729f03f"
                 class="img-resize rounded"
@@ -78,7 +78,7 @@
         <!-- -----------------------------------------------
         Second Column
       ----------------------------------------------- -->
-        <v-col cols="12" sm="12" md="12" lg="3" class="px-xs-0">
+        <v-col cols="12" sm="12" md="12" lg="3" class="px-xs-0 mx-auto">
           <h4 class="font-weight-regular font-18">Address</h4>
           <p class="mt-2">
             กองกิจการนิสิต สำนักงานอธิการบดี อาคารเรียนรวม ชั้น 3 โซน A ห้อง
@@ -88,34 +88,67 @@
         <!-- -----------------------------------------------
         Third Column
       ----------------------------------------------- -->
-        <v-col cols="12" sm="12" md="12" lg="3" class="px-xs-0">
-          <h4 class="font-weight-regular font-18">Phone</h4>
-          <p class="mt-2 mb-0">Reception : รอข้อมูลเพิ่มเติม</p>
-          <p>Office : รอข้อมูลเพิ่มเติม</p>
-        </v-col>
-        <!-- -----------------------------------------------
-        Fourth Column
-      ----------------------------------------------- -->
-        <v-col cols="12" sm="12" md="12" lg="3" class="px-xs-0">
-          <h4 class="font-weight-regular font-18">Social</h4>
-
-          <div class="social-icons mt-2">
-            <a href="http://www.facebook.com/ศาสนบุคคลกับการสร้างสังคมสุขภาวะ">
-              <i class="mdi mdi-facebook"></i>
-            </a>
-            <a href="http://www.stud.mcu.ac.th/shi/">
-              <i class="mdi mdi-twitter"></i>
-            </a>
-          </div>
+        <v-col cols="12" sm="12" md="12" lg="3" class="px-xs-0 mx-auto">
+          <v-row class="py-0">
+            <v-col cols="auto">
+              <h4 class="font-weight-regular font-18">Phone</h4>
+              <p>035-248000 ต่อ 8401 หรือ 8402, 8405, 8406, 8408</p>
+            </v-col>
+          </v-row>
+          <v-row class="py-0 d-flex flex-column">
+            <v-col cols="auto">
+              <v-list class="pa-0" dense>
+                <h4 class="font-weight-regular font-18">Social</h4>
+                <v-list-item class="pa-0">
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <a
+                        class="dark-link"
+                        href="https://lin.ee/1IjFj65Iv"
+                        target="_blank"
+                      >
+                        <v-icon class="pa-1">mdi-alpha-l-circle</v-icon>คสส.</a
+                      >
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item class="pa-0">
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <a
+                        class="dark-link"
+                        href="https://www.facebook.com/%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%99%E0%B8%9A%E0%B8%B8%E0%B8%84%E0%B8%84%E0%B8%A5%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%A1%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%A0%E0%B8%B2%E0%B8%A7%E0%B8%B0-111080540363528/"
+                        target="_blank"
+                      >
+                        <v-icon class="pa-1">mdi-facebook</v-icon
+                        >ศาสนบุคคลกับการสร้างสังคมสุขภาวะ</a
+                      >
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item class="pa-0">
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <a
+                        class="dark-link"
+                        href="http://www.stud.mcu.ac.th/shi/"
+                        target="_blank"
+                      >
+                        <v-icon class="pa-1">mdi-web</v-icon>stud.mcu.ac.th</a
+                      >
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
       <div class="footer-bottom-bar font-14">
         <div class="d-block d-md-flex align-center">
           <p>
             All Rights Reserved by
-            <a class="dark-link" href="http://www.stud.mcu.ac.th/shi/"
-              >stud.mcu.ac.th</a
-            >
+            <a class="dark-link" href="#">Phrasangsuk.com</a>
           </p>
         </div>
       </div>
@@ -142,31 +175,17 @@ export default {
   color: #3e4555 !important;
   &:hover {
     color: #316ce8 !important;
+    .v-icon {
+      color: #316ce8 !important;
+    }
   }
 }
 .link {
   text-decoration: none;
   &:hover {
     color: #316ce8 !important;
-  }
-}
-
-.social-icons {
-  a {
-    width: 34px;
-    height: 34px;
-    line-height: 34px;
-    text-align: center;
-    display: inline-block;
-    border-radius: 100%;
-    margin: 0 5px;
-    transition: 0.2s ease-in;
-    color: #263238;
-    background: #f4f8fa;
-    &:hover {
-      transform: translate3d(0px, -5px, 0px);
-      background: #0164d3;
-      color: white;
+    .v-icon {
+      color: #316ce8 !important;
     }
   }
 }
