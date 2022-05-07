@@ -132,7 +132,7 @@ export default {
         }
         console.log({
           areaID: this.areaID,
-          projectID: this.projectID,
+          projectID: { id: this.projectID, type: typeof this.projectID },
           title: this.title,
           content: this.content,
           type: this.type,
@@ -145,25 +145,21 @@ export default {
           viewCount: 0,
           files: files,
         })
-        // await this.uploadImg()
-        // if (this.pdfFile) {
-        //   await this.uploadPDF()
-        // }
-        // await this.createData()
-        Promise.all(
-          // Array of "Promises"
-          files.map((file) => this.uploadFile(file))
-        )
-          .then((url) => {
-            console.log(`All success`)
-            console.log(this.urlImg);
-            console.log(this.urlPDF);
+        const promises = files.map((file) => this.uploadFile(file))
+        Promise.all(promises)
+          .then((uploadedMediaList) => {
+            this.urlImg = uploadedMediaList[0]
+            this.urlPDF = uploadedMediaList[1]
+            console.log(uploadedMediaList, `All success`)
+            this.createData()
+            this.$nuxt.$loading.finish()
           })
           .catch((error) => {
             console.log(`Some failed: `, error.message)
+            this.$nuxt.$loading.finish()
+            this.$refs.form.reset()
           })
-        this.$nuxt.$loading.finish()
-        this.$refs.form.reset()
+
         return
       }
     },
@@ -188,60 +184,7 @@ export default {
       const fileRef = storageRef.child(
         `areas/${this.areaID}/${type}/${file.name}`
       )
-      await fileRef.put(file).on(
-        'state_changed',
-        (snapshot) => {
-          console.log(snapshot)
-        },
-        (err) => {
-          console.log(err)
-        },
-        async () => {
-          if (file.type == 'application/pdf') {
-            this.urlPDF = await fileRef.getDownloadURL()
-          } else {
-            this.urlImg = await fileRef.getDownloadURL()
-          }
-          console.log('One success:', file.name)
-        }
-      )
-    },
-    async uploadImg() {
-      // upload image to storage
-      const storageRef = this.$fire.storage.ref()
-      const imgRef = storageRef.child(
-        `areas/${this.areaID}/coverImg/${this.coverImgFile.name}`
-      )
-      await imgRef.put(this.coverImgFile).on(
-        'state_changed',
-        (snapshot) => {
-          console.log(snapshot)
-        },
-        (err) => {
-          console.log(err)
-        },
-        async () => {
-          this.urlImg = await imgRef.getDownloadURL()
-        }
-      )
-    },
-    async uploadPDF() {
-      const storageRef = this.$fire.storage.ref()
-      const pdfRef = storageRef.child(
-        `areas/${this.areaID}/doc/${this.pdfFile.name}`
-      )
-      await pdfRef.put(this.pdfFile).on(
-        'state_achanged',
-        (snapshot) => {
-          console.log(snapshot)
-        },
-        (err) => {
-          console.log(err)
-        },
-        async () => {
-          this.urlPDF = await pdfRef.getDownloadURL()
-        }
-      )
+      return fileRef.put(file).then(() => fileRef.getDownloadURL())
     },
 
     async createData() {
@@ -263,6 +206,7 @@ export default {
         viewCount: 0,
       })
       console.log('done.')
+      this.$refs.form.reset()
     },
   },
 }
